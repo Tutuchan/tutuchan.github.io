@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>A quick look at win rates in premade groups in League of Legends - A gameR perspective</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="A gameR perspective">
+<meta property="og:title" content="A quick look at win rates in premade groups in League of Legends">
+
+
+
+
+  <meta property="og:description" content="Let’s start off this blog with a post about League of Legends. For those of you that are not aware of this game, it is one of the most popular games on the planet at the moment, with 67 million people playing every month, 27 million everyday and over 7.5 million concurrently during peak times, according to its developer, Riot Games.">
+
+
+
+  <meta name="twitter:site" content="@tutuchan">
+  <meta name="twitter:title" content="A quick look at win rates in premade groups in League of Legends">
+  <meta name="twitter:description" content="Let’s start off this blog with a post about League of Legends. For those of you that are not aware of this game, it is one of the most popular games on the planet at the moment, with 67 million people playing every month, 27 million everyday and over 7.5 million concurrently during peak times, according to its developer, Riot Games.">
+  <meta name="twitter:url" content="">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-05-21T14:55:44+02:00">
+  
+  
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "person",
+      "name" : "Pierre Formont",
+      "url" : null,
+      "sameAs" : ["https://twitter.com/tutuchan"]
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="A gameR perspective Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="/">A gameR perspective</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="/blog/">blog</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="/about/">About</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="/images/bio-photo.jpg" class="author__avatar" alt="Pierre Formont">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Pierre Formont</h3>
+    <p class="author__bio">Gamer, data person, R enthusiast.</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li>
+<i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> Paris, France</li>
+      
+      
+      
+        <li><a href="mailto:pierre.formont@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/tutuchan"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/tutuchan"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://steamcommunity.com/profiles/76561198001177507"><i class="fa fa-fw fa-steam-square" aria-hidden="true"></i> Steam</a></li>
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="A quick look at win rates in premade groups in League of Legends">
+    <meta itemprop="description" content="Let’s start off this blog with a post about League of Legends. For those of you that are not aware of this game, it is one of the most popular games on the planet at the moment, with 67 million people playing every month, 27 million everyday and over 7.5 million concurrently during peak times, according to its developer, Riot Games.">
+    <meta itemprop="datePublished" content="May 21, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">A quick look at win rates in premade groups in League of Legends
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  18 minutes read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <aside class="sidebar__right">
+<nav class="toc">
+    <header><h4 class="nav__title">
+<i class="fa fa-file-text"></i> Table of contents</h4></header>
+<ul class="toc__menu" id="markdown-toc">
+  <li>
+<a href="#mobas-a-brief-explanation" id="markdown-toc-mobas-a-brief-explanation">MOBAs, a brief explanation</a>    <ul>
+      <li><a href="#origin" id="markdown-toc-origin">Origin</a></li>
+      <li><a href="#the-map" id="markdown-toc-the-map">The map</a></li>
+      <li><a href="#gameplay" id="markdown-toc-gameplay">Gameplay</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#ranked-play" id="markdown-toc-ranked-play">Ranked play</a>    <ul>
+      <li><a href="#context" id="markdown-toc-context">Context</a></li>
+      <li><a href="#rank-distribution" id="markdown-toc-rank-distribution">Rank distribution</a></li>
+      <li><a href="#dynamic-queue" id="markdown-toc-dynamic-queue">Dynamic queue</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#impact-on-regular-players" id="markdown-toc-impact-on-regular-players">Impact on regular players</a>    <ul>
+      <li><a href="#lolapi-package" id="markdown-toc-lolapi-package">lolapi package</a></li>
+      <li>
+<a href="#fetching-the-data" id="markdown-toc-fetching-the-data">Fetching the data</a>        <ul>
+          <li><a href="#curated-data" id="markdown-toc-curated-data">Curated data</a></li>
+          <li><a href="#identifying-premades" id="markdown-toc-identifying-premades">Identifying premades</a></li>
+          <li><a href="#distribution-of-the-number-of-premades" id="markdown-toc-distribution-of-the-number-of-premades">Distribution of the number of premades</a></li>
+          <li><a href="#win-percentage-with-premades" id="markdown-toc-win-percentage-with-premades">Win percentage with premades</a></li>
+          <li><a href="#role-repartition-and-win-rate" id="markdown-toc-role-repartition-and-win-rate">Role repartition and win rate</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+  </nav>
+</aside>
+
+<p>Let’s start off this blog with a post about <a href="http://leagueoflegends.com/">League of Legends</a>. For those of you that are not aware of this game, it is one of the most popular games on the planet at the moment, with 67 million people playing every month, 27 million everyday and over 7.5 million concurrently during peak times, according to its developer, <a href="http://www.riotgames.com/our-games">Riot Games</a>.</p>
+
+<p>I have started playing again in the past few months after a hiatus of several months playing <a href="http://us.battle.net/heroes/en/">Heroes of the Storm</a>, another game of the same genre. League of Legends (now abbreviated to <strong>LoL</strong>) and Heroes of the Storm (<strong>HotS</strong>) are both part of what is generally called the MOBA (for <strong>M</strong>ultiplayer <strong>O</strong>nline <strong>B</strong>attle <strong>A</strong>rena) genre, even if several terms have arisen to describe it (<strong>HotS</strong> is marketed as a <em>team brawler</em>, for example).</p>
+
+<h2 id="mobas-a-brief-explanation">MOBAs, a brief explanation</h2>
+
+<h3 id="origin">Origin</h3>
+
+<p>MOBAs are descendants of <em>Defense of the Ancients</em>, or <strong>DotA</strong>, a custom map for the Warcraft III game by Blizzard Entertainment, which is itself a descendant of <em>Aeon of Strike</em>, a custom map for Starcraft, an earlier Blizzard game. The most popular games of this genre as of today are, in no particular order:</p>
+
+<ul>
+  <li>League of Legends,</li>
+  <li>DotA 2,</li>
+  <li>Smite,</li>
+  <li>Heroes of the Storm</li>
+</ul>
+
+<h3 id="the-map">The map</h3>
+
+<p>In <strong>LoL</strong>, two teams of five people fight against each other on a map divided into three lanes, based on the original <strong>DotA</strong> map. Each player controls a <strong>champion</strong>, a character with a few abilities and each team must work together to destroy the enemy team’s Nexus, a big structure that lies at the heart of each base. The map looks like the following:</p>
+
+<p><img src="../../images/r/2016-05-08-premades-lol/lolmap_annotated.png" alt=""></p>
+
+<p><br></p>
+
+<p>On the bottom-left side of the map is the blue team’s base, with the Nexus, the big blue crystalline structure and on the opposite side, the red team’s base with the red Nexus. As I said, there are three lanes between the bases: top, mid and bottom lane. Every 30 seconds, a bunch of AI-controlled minions will spawn from each base and run toward the enemy base in each of these three lanes. Killing these minions give gold to the player that lands the killing blow and this gold allows a player to buy items to make them more powerful which means they can kill minions (or enemy champions) faster, withstand damage done to them more easily, be more mobile, etc. To reach the Nexus, players must progress through at least one lane by destroying structures along the way (several towers and a special building called an <strong>inhibitor</strong>) in order to deal damage to the Nexus and eventually destroy it.</p>
+
+<h3 id="gameplay">Gameplay</h3>
+
+<p>As of today, there are <a href="http://gameinfo.euw.leagueoflegends.com/en/game-info/champions/">130 different champions</a> in <strong>LoL</strong> so I won’t go into details but suffice it to say that there are many different archetypes: <a href="http://gameinfo.euw.leagueoflegends.com/en/game-info/champions/annie/">burst mages</a>, <a href="http://gameinfo.euw.leagueoflegends.com/en/game-info/champions/leesin/">blind martial arts experts</a>, <a href="http://gameinfo.euw.leagueoflegends.com/en/game-info/champions/jarvaniv/">spear-wielding dunkmasters</a>, <a href="http://gameinfo.euw.leagueoflegends.com/en/game-info/champions/sejuani/">pig-riding frost queens</a> and many more. It’s <a href="https://www.penny-arcade.com/comic/2011/06/10">free</a>, give it a try.</p>
+
+<p>As I said before, there are three lanes and even though there are many champions, the way they are split between the different lanes (3 lanes for 5 people) has not changed for a few years:</p>
+
+<ul>
+  <li>the red line represents the top lane, which is a solo lane, only one player from each team goes there, usually a tanky champion (able to withstand more damage than the others),</li>
+  <li>the blue line represents the mid lane, also a solo lane, usually a mage or an assassin is sent there, their goal is to get as much gold as possible by killing minions (and possibly the enemy mid laner) to be able to inflict a lot of damage on enemy champions during fights,</li>
+  <li>the yellow line represents the bottom lane, which is the duo lane, two players from each team are sent there, usually a marksman - a physical ranged damage dealer - and a support, which is a champion that does not need much gold to be effective, thereby leaving all the gold from the minions to their marksman and focusing on utility by protecting them or setting up kills on the enemy team,</li>
+  <li>that leaves one player on each team who will go into the brown areas, called the <em>jungle</em> and fight neutral monsters there, in order to gain gold and experience. They will come out periodically to <strong>gank</strong> (abbreviation of <em>gang kill</em>) enemy lanes: when they show up in a solo lane for example, it is a 2-for-1 advantage for the ganking side, with the purpose of killing the enemy champion in that lane.</li>
+</ul>
+
+<p>I figure this gives enough context for the next part of this post.</p>
+
+<h2 id="ranked-play">Ranked play</h2>
+
+<h3 id="context">Context</h3>
+
+<p>All these MOBAs feature a ranked ladder, where each game you play helps determining your placement among all the other players. Most of the time, these systems are derived from the <a href="https://en.wikipedia.org/wiki/Elo_rating_system">ELO rating system</a> but their actual implementation may vary because the ELO system has been designed for a 1-versus-1 game while MOBAs are usually 5-versus-5 team games.</p>
+
+<p>In the case of <strong>LoL</strong>, it is even more confusing because there is no way to know your ELO rating (called <strong>hidden MMR</strong> for Matchmaking Rating and because you can’t see it) and your “skill level” is represented in-game by a system of divisions ranging from Bronze to Challenger. Each division is further split into 5 tiers, from V to I.</p>
+
+<p>After 10 placement matches at the beginning of the season (seasons are one-year long), each player is placed into a division and a tier, for example Silver IV. Each game won in ranked play lets a player earn League Points (or LP) and each loss causes a loss of these LP. Once a hundred LP have been gathered, a player plays a best-of-two (or three if they were in a I tier) promotion match: if they win it, they advance to next tier (or the next division), else they lose a bunch of LP and have to return to 100LP in order to get to this promotion match again.</p>
+
+<h3 id="rank-distribution">Rank distribution</h3>
+
+<p>You can see on the <a href="http://www.leagueofgraphs.com/rankings/rank-distribution">LeagueOfGraphs website</a> the distribution of the ranks amongst all tiers and divisions. As you can see, about <strong>90% of the population is Gold or lower</strong>.</p>
+
+<h3 id="dynamic-queue">Dynamic queue</h3>
+
+<p>Until the 2016 season, the ranked ladder in <strong>LoL</strong> was called <strong>solo queue</strong> for the good reason that you could only queue for ranked matches as a solo player or at most with one other player, which is called a premade group or <strong>premade</strong> for short. If your group contained three or four people, ranked matches were not available: the only option was to play normal games, i.e. games whose wins or losses had no impact on your ranked progression (they even have a different hidden MMR). If you had a group of five, there was a separater ladder, called <strong>Ranked Teams</strong> with a separate ladder.</p>
+
+<p>Then, Riot Games <a href="http://na.leagueoflegends.com/na/site/2016-season-update/ranked-improvements.html">announced in November 2015</a> that the solo/duo queue would be replaced with a dynamic queue where you could group up with any number of teammates for ranked matches. This announcement was met with a lot of skepticism from the players who argued that a player’s division would no longer be a reflection of his skill (it is still unclear that <strong>solo queue</strong> actually WAS a reflection of a player’s skill but that is another debate) but that they could get <em>carried</em> to a higher division by friends that are better at the game than them.</p>
+
+<p>Another argument against dynamic queue was that, as it favored same-size groups in opposing teams, at higher levels of play, it would be difficult to find two groups of say, 4 players, that play at the same time in order to match them against each other. This would cause the algorithm to find another group of 4 people with a lower rating in order to match it with the 4-man high-rated group so queues times are not too long (20 minutes queues are not unusual at this level of play) and this would make for a uninteresting game because of the skill imbalance.  We’re talking about top 0.1% here so this would affect a very low number of people but these people are the competitive players that rely partly on <strong>solo queue</strong> to keep their mechanics fresh and who have a very large community outreach.</p>
+
+<p>This also came as a questionable decision considering the <a href="http://us.battle.net/heroes/en/blog/19883523/party-size-changes-for-hero-league-9-2-2015">September 2015 announcement</a> by Blizzard that they were removing their dynamic queue system in <strong>HotS</strong> in favor of a solo/duo queue system, citing reasons (emphasis mine) such as this one:</p>
+
+<blockquote>
+  <p>When we look at the data for parties of three and four players in Hero League, <strong>we often see large skill gaps among party members</strong>. This is fine for players in a party of four, for example, who have agreed to queue together despite any differences in skill that may exist. However, the matchmaker needs to complete the team by pulling in a fifth player who queued up alone, and did not necessarily want to play with teammates of varying skill levels.</p>
+</blockquote>
+
+<p>or that one:</p>
+
+<blockquote>
+  <p>This can also create situations in which party members will discuss strategy with each other, but don’t end up communicating the game plan to their fifth teammate. On the other end of the spectrum, solo players may disagree with the party’s decisions, or show unwillingness to help the team. <strong>This can result in a friction for both sides if communication doesn’t improve</strong>.</p>
+</blockquote>
+
+<p>There has been a lot of vocal opposition, especially by players that have a very high rank (Challengers usually) and/or professional players (players are paid to compete in season-long championships in <a href="http://www.lolesports.com/en_US/eu-lcs/eu_2016_spring/schedule/default">Europe</a>, <a href="http://www.lolesports.com/en_US/na-lcs/na_2016_spring/schedule/default">North America</a>, <a href="http://www.lolesports.com/en_US/lck/lck_2016_spring/schedule/default">Korea</a>, <a href="http://www.lolesports.com/en_US/lpl-china/lpl_2016_spring/schedule/default">China</a> and <a href="http://www.lolesports.com/en_US/">others</a> and there are several international tournaments during the season, like the <a href="http://www.lolesports.com/en_US/all-star">All-Star event</a> or the <a href="http://www.lolesports.com/en_US/articles/msi-2016-heading-shanghai">Mid-Season Invitational</a>, which culminates with the World Championship <a href="https://en.wikipedia.org/wiki/2015_League_of_Legends_World_Championship">which took place across Europe in 2015</a>) :</p>
+
+<ul>
+  <li>here is Meteos from C9, one of North America’s most successful teams, ranting about dynamic queue (<strong>NSFW, language</strong>):</li>
+</ul>
+
+<iframe id="meteosvid" width="560" height="315" src="http://www.youtube.com/embed/CV9-kxD2XEM?rel=0" frameborder="0" allowfullscreen=""></iframe>
+<p><br></p>
+
+<ul>
+  <li>here are tweets from professional players, with screenshots of the end-game screen after games where they queued with several members of their team (the team they play competitively with) and got matched against solo players or other less organized groups:
+    <ul>
+      <li>
+<a href="https://twitter.com/DarshanU/status/687898439611322368">Darshan from CLG</a>,</li>
+      <li>
+<a href="https://twitter.com/Hai/status/687865696869457920">Hai from C9</a>,</li>
+      <li><a href="https://twitter.com/Pobelter/status/687848986976194561">Pobelter from IMT</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>All this circumstantial “evidence”, if we can even call it that, seems to indicate that dynamic queue indeed had a negative effect on the higher levels of play. But if you recall the <a href="#rank-distribution">ranked distributions</a>, the vast majority of the player base is Gold or lower, so what about those players, have they been negatively affected ?</p>
+
+<p>There have been a couple discussions about this in the past couple weeks on the <strong>LoL</strong> <a href="https://www.reddit.com/r/leagueoflegends">subreddit</a>, like <a href="https://www.reddit.com/r/leagueoflegends/comments/4dgv08/serious_is_it_possible_that_dynamic_queue_is/">this one</a> or <a href="https://www.reddit.com/r/leagueoflegends/comments/4di0ut/serious_why_do_people_have_a_fundamental/">that one</a> but I have yet to see any analysis backed by data.</p>
+
+<h2 id="impact-on-regular-players">Impact on regular players</h2>
+
+<p>As I said in the introduction, I started playing again a few months ago after a hiatus of several months of playing <strong>HotS</strong> with my group of friends. After a couple of weeks, I began to get interested in this question of the impact of dynamic queues on regular players. Fortunately, Riot Games provides a <a href="https://developer.riotgames.com/">very extensive API</a> with a <a href="https://developer.riotgames.com/api/methods">full-fledged documentation</a>, providing you have a level 5 <strong>LoL</strong> account.</p>
+
+<p>Due to professional and personal constraints, I usually play only a couple of games during the week and more during the weekend if I don’t have anything planned so I am sitting at a mere Gold I for the moment (contrary to my Season 3 Diamond V days <img class="emoji" title=":sob:" alt=":sob:" src="https://assets.github.com/images/icons/emoji/unicode/1f62d.png" height="20" width="20" align="absmiddle">) but still, not too shabby. After playing some games with my friends, I started to wonder if I was actually profiting from playing with them or if I was better off playing solo (from a purely “ranking up” perspective of course).</p>
+
+<h3 id="lolapi-package">lolapi package</h3>
+
+<p>I started by wrapping the API in an <a href="https://github.com/Tutuchan/lolapi">R package</a> to make things easier. It is at the moment a plain wrapper of all methods of the API (except two of them that do not interest me at the moment). The data is fetched using the <a href="https://github.com/jeroenooms/jsonlite">jsonlite</a> package and the resulting JSON is returned with no further processing.</p>
+
+<p>If there is a need for a cleaner output or more methods, I can certainly update the package but this is good enough for me now.</p>
+
+<h3 id="fetching-the-data">Fetching the data</h3>
+
+<p>Let’s start by setting up some libraries:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">chartjs</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">formattable</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">highcharter</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">jsonlite</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">lolapi</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">purrr</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">tidyr</span><span class="p">)</span>
+
+<span class="n">chart_size</span> <span class="o">&lt;-</span> <span class="s2">"300px"</span></code></pre></figure>
+
+<p>Now we can get the data. The first step is to identify premades in a match. Riot used to provide this information in the API but <a href="https://developer.riotgames.com/discussion/community-discussion/show/lQKLmhtQ">decided to stop</a> because it brought more harm than benefit. One way to identify people who play together is to get all matches for a given player and scrape this data to find names of players that are regularly on his team. This is a bit sketchy according to <a href="https://developer.riotgames.com/discussion/community-discussion/show/RpHIoilO">this post</a> but I don’t plan on making this on a large scale so I guess I’m okay (Rito please, no <a href="https://www.reddit.com/r/LyteSmites/">LyteSmite</a>). Actually I might do this at scale but I’ll anonymize all player names and ids in this scenario.</p>
+
+<p>The following function fetches all matches for a <code class="highlighter-rouge">summoner_name</code>, basically the name of your character in game, and stores information about them in a <em>.rds</em> file, this is good enough for the time being. If the file already exists, it loads it instead of fetching all the data again. This is because, woe is me, I only have a development key and I am limited to 10 requests every 10 seconds and 500 requests every 10 minutes by <a href="https://developer.riotgames.com/docs/api-keys">the API</a>.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">get_match_results</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">summoner_name</span><span class="p">){</span>
+  <span class="n">fName</span> <span class="o">&lt;-</span> <span class="n">paste0</span><span class="p">(</span><span class="s2">"../data/"</span><span class="p">,</span> <span class="n">summoner_name</span><span class="p">,</span> <span class="s2">".rds"</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">file.exists</span><span class="p">(</span><span class="n">fName</span><span class="p">)){</span>
+    <span class="c1"># Get the summoner id
+</span>    <span class="n">summoner_id</span> <span class="o">&lt;-</span> <span class="n">summoner</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">summoner_name</span><span class="p">)[[</span><span class="n">tolower</span><span class="p">(</span><span class="n">summoner_name</span><span class="p">)]]</span><span class="o">$</span><span class="n">id</span>
+    <span class="c1"># Get list of ranked matches in dynamic queue
+</span>    <span class="n">matches</span> <span class="o">&lt;-</span> <span class="n">match_list</span><span class="p">(</span><span class="n">summoner_id</span> <span class="o">=</span> <span class="n">summoner_id</span><span class="p">,</span> 
+                          <span class="n">ranked_queues</span> <span class="o">=</span> <span class="s2">"TEAM_BUILDER_DRAFT_RANKED_5x5"</span><span class="p">)</span><span class="o">$</span><span class="n">matches</span>
+    <span class="c1"># Extract the match ids
+</span>    <span class="n">match_ids</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">matches</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="o">$</span><span class="n">matchId</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="n">unlist</span>
+    
+    <span class="c1"># For each match id
+</span>    <span class="n">match_results</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">match_ids</span><span class="p">),</span> <span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Sys.sleep</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="c1"># To ensure I stay under the rate limit
+</span>      <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">match_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+      <span class="n">cat</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"Fetching match "</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">"/"</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">match_ids</span><span class="p">),</span> <span class="s2">": "</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">"\n"</span><span class="p">))</span>
+      <span class="c1"># Get the match data
+</span>      <span class="n">res</span> <span class="o">&lt;-</span> <span class="n">lol_match</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+      <span class="c1"># Get the participants id and name
+</span>      <span class="n">participants_identities</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">res</span><span class="o">$</span><span class="n">participantIdentities</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">data_frame</span><span class="p">(</span><span class="n">id</span> <span class="o">=</span> <span class="n">x</span><span class="o">$</span><span class="n">participantId</span><span class="p">,</span> 
+                   <span class="n">summoner_id</span> <span class="o">=</span> <span class="n">x</span><span class="o">$</span><span class="n">player</span><span class="o">$</span><span class="n">summonerId</span><span class="p">,</span> 
+                   <span class="n">summoner_name</span> <span class="o">=</span> <span class="n">x</span><span class="o">$</span><span class="n">player</span><span class="o">$</span><span class="n">summonerName</span><span class="p">)})</span> <span class="o">%&gt;%</span> 
+        <span class="n">bind_rows</span>
+      
+      <span class="c1"># Get the participants team and champion
+</span>      <span class="n">participants</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">res</span><span class="o">$</span><span class="n">participants</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">role</span> <span class="o">&lt;-</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">$</span><span class="n">timeline</span><span class="o">$</span><span class="n">role</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">"NONE"</span><span class="p">,</span> <span class="s2">"SOLO"</span><span class="p">))</span> <span class="n">x</span><span class="o">$</span><span class="n">timeline</span><span class="o">$</span><span class="n">lane</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="n">x</span><span class="o">$</span><span class="n">timeline</span><span class="o">$</span><span class="n">role</span>
+        <span class="p">}</span>
+        <span class="n">data_frame</span><span class="p">(</span><span class="n">id</span> <span class="o">=</span> <span class="n">x</span><span class="o">$</span><span class="n">participantId</span><span class="p">,</span> 
+                   <span class="n">team_id</span> <span class="o">=</span> <span class="n">x</span><span class="o">$</span><span class="n">teamId</span><span class="p">,</span> 
+                   <span class="n">champion_id</span> <span class="o">=</span> <span class="n">x</span><span class="o">$</span><span class="n">championId</span><span class="p">,</span>
+                   <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">)})</span> <span class="o">%&gt;%</span> 
+        <span class="n">bind_rows</span>
+      <span class="c1"># Get the winning team
+</span>      <span class="n">teams</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">res</span><span class="o">$</span><span class="n">teams</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">data_frame</span><span class="p">(</span><span class="n">team_id</span> <span class="o">=</span> <span class="n">x</span><span class="o">$</span><span class="n">teamId</span><span class="p">,</span> 
+                   <span class="n">winner</span> <span class="o">=</span> <span class="n">x</span><span class="o">$</span><span class="n">winner</span><span class="p">)})</span> <span class="o">%&gt;%</span> 
+        <span class="n">bind_rows</span>
+       
+      <span class="c1"># Bind all this together
+</span>      <span class="n">out</span> <span class="o">&lt;-</span> <span class="n">participants_identities</span> <span class="o">%&gt;%</span> 
+        <span class="n">inner_join</span><span class="p">(</span><span class="n">participants</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s2">"id"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+        <span class="n">inner_join</span><span class="p">(</span><span class="n">teams</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s2">"team_id"</span><span class="p">)</span>
+      <span class="n">out</span><span class="o">$</span><span class="n">match_id</span> <span class="o">&lt;-</span> <span class="n">res</span><span class="o">$</span><span class="n">matchId</span>
+      <span class="n">out</span><span class="o">$</span><span class="n">date</span> <span class="o">&lt;-</span> <span class="n">as.POSIXct</span><span class="p">(</span><span class="n">res</span><span class="o">$</span><span class="n">matchCreation</span> <span class="o">/</span> <span class="m">1000</span><span class="p">,</span> <span class="n">origin</span> <span class="o">=</span> <span class="s2">"1970-01-01"</span><span class="p">)</span>
+      <span class="n">out</span> <span class="o">%&gt;%</span> 
+        <span class="n">select</span><span class="p">(</span><span class="n">match_id</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">everything</span><span class="p">(),</span> <span class="o">-</span><span class="n">id</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="n">saveRDS</span><span class="p">(</span><span class="n">match_results</span><span class="p">,</span> <span class="n">fName</span><span class="p">)</span>
+    <span class="n">match_results</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="n">readRDS</span><span class="p">(</span><span class="n">fName</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+<h4 id="curated-data">Curated data</h4>
+
+<p>Let’s have a look at this data for my account, <strong>Tutuchan</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">current_summoner_name</span> <span class="o">&lt;-</span> <span class="s2">"Tutuchan"</span>
+
+<span class="n">all_matches</span> <span class="o">&lt;-</span> <span class="n">get_match_results</span><span class="p">(</span><span class="n">current_summoner_name</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">bind_rows</span></code></pre></figure>
+
+<p>This data.frame contains the 102 matches I have played since Dynamic queue started.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">f</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">case_when</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">"DUO"</span><span class="p">,</span> <span class="s2">"DUO_SUPPORT"</span><span class="p">)</span> <span class="o">~</span> <span class="s2">"support"</span><span class="p">,</span>
+            <span class="n">x</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="s2">"BOTTOM"</span><span class="p">,</span> <span class="s2">"DUO_CARRY"</span><span class="p">)</span> <span class="o">~</span> <span class="s2">"adc"</span><span class="p">,</span>
+            <span class="n">TRUE</span> <span class="o">~</span> <span class="n">tolower</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="n">all_matches</span><span class="o">$</span><span class="n">role</span> <span class="o">&lt;-</span> <span class="n">f</span><span class="p">(</span><span class="n">all_matches</span><span class="o">$</span><span class="n">role</span><span class="p">)</span></code></pre></figure>
+
+<h4 id="identifying-premades">Identifying premades</h4>
+
+<p>From this dataframe, we’ll extract the names of the summoners that have been in my team more than once and compute the proportion of matches I have played with them. Then we’ll use the  <a href="http://github.com/tutuchan/chartjs/">chartjs</a> package to draw a bar chart of this data.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dfPremades</span> <span class="o">&lt;-</span> <span class="n">all_matches</span> <span class="o">%&gt;%</span> 
+  <span class="n">group_by</span><span class="p">(</span><span class="n">match_id</span><span class="p">,</span> <span class="n">team_id</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">filter</span><span class="p">(</span><span class="n">current_summoner_name</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">summoner_name</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">ungroup</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+  <span class="n">filter</span><span class="p">(</span><span class="n">summoner_name</span> <span class="o">!=</span> <span class="n">current_summoner_name</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">count</span><span class="p">(</span><span class="n">summoner_name</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">filter</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">mutate</span><span class="p">(</span><span class="n">prop</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">length</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">all_matches</span><span class="o">$</span><span class="n">match_id</span><span class="p">))</span> <span class="o">*</span> <span class="m">100</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+
+<span class="n">chartjs</span><span class="p">(</span><span class="n">height</span> <span class="o">=</span> <span class="n">chart_size</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsBar</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="n">dfPremades</span><span class="o">$</span><span class="n">summoner_name</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsEditScale</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">gridLines</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">display</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">))</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsAddScale</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s2">"linear"</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="s2">"right"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfPremades</span><span class="o">$</span><span class="n">prop</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"proportion"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfPremades</span><span class="o">$</span><span class="n">n</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"number of games"</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>  <span class="o">%&gt;%</span>
+  <span class="n">cjsLegend</span><span class="p">()</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsTooltips</span><span class="p">(</span><span class="n">callbacks</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="n">htmlwidgets</span><span class="o">::</span><span class="n">JS</span><span class="p">(</span><span class="s2">"function(tooltipItem, data) {
+  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+  var res = datasetLabel + ': ' + tooltipItem.yLabel;
+  if (datasetLabel == 'proportion')  res = res + '%'
+  return res;}"</span><span class="p">)))</span></code></pre></figure>
+
+<!--html_preserve-->
+<div id="htmlwidget-6603-container" class="htmlwidget_container">
+<canvas id="htmlwidget-6603" class="chartjs html-widget" style="width:504px;height:300px;" width="504" height="300px"></canvas>
+</div>
+<script type="application/json" data-for="htmlwidget-6603">{"x":{"options":{"responsive":true,"maintainAspectRatio":true,"legend":{"display":true},"tooltips":{"callbacks":{"label":"function(tooltipItem, data) {\n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';\n  var res = datasetLabel + ': ' + tooltipItem.yLabel;\n  if (datasetLabel == 'proportion')  res = res + '%'\n  return res;}"}}},"palette":"Paired","debug":false,"type":"bar","data":{"labels":["Zedlol","Teramur","Blazing Flamberg","TehJester","HappyFTN","Luciha","Flarus","Dingouze","Legolino","MOAR LUCK PLS","83Petrus","Idstein","Im Nasos","LoCK Nightmare","WRT Daddy"],"datasets":[{"data":[38.24,31.37,27.45,20.59,11.76,8.82,4.9,2.94,2.94,2.94,1.96,1.96,1.96,1.96,1.96],"borderColor":"#000000","backgroundColor":"#A6CEE3","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#1F78B4","label":"proportion","type":"bar"},{"data":[39,32,28,21,12,9,5,3,3,3,2,2,2,2,2],"borderColor":"#000000","backgroundColor":"#B2DF8A","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#33A02C","label":"number of games","type":"bar","yAxisID":"y-axis-1"}]},"scales":{"x":[{"gridLines":{"display":false},"type":"category","stacked":false}],"y":[{"type":"linear","stacked":false},{"type":"linear","position":"right"}]}},"evals":["options.tooltips.callbacks.label"],"jsHooks":[]}</script>
+<!--/html_preserve-->
+
+<p>I actually know most of these people and they <em>ARE</em> people I have played with in dynamic queue so it seems to be working pretty well. Some of them are people I got matched with several times without actually queuing with them so let’s filter this a bit more by only selecting people I have played more than <strong>twice</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dfPremades</span> <span class="o">&lt;-</span> <span class="n">all_matches</span> <span class="o">%&gt;%</span> 
+  <span class="n">group_by</span><span class="p">(</span><span class="n">match_id</span><span class="p">,</span> <span class="n">team_id</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">filter</span><span class="p">(</span><span class="n">current_summoner_name</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">summoner_name</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">ungroup</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+  <span class="n">filter</span><span class="p">(</span><span class="n">summoner_name</span> <span class="o">!=</span> <span class="n">current_summoner_name</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">count</span><span class="p">(</span><span class="n">summoner_name</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">arrange</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">filter</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="m">2</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">mutate</span><span class="p">(</span><span class="n">prop</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">length</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">all_matches</span><span class="o">$</span><span class="n">match_id</span><span class="p">))</span> <span class="o">*</span> <span class="m">100</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+
+<span class="n">chartjs</span><span class="p">(</span><span class="n">height</span> <span class="o">=</span> <span class="n">chart_size</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsBar</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="n">dfPremades</span><span class="o">$</span><span class="n">summoner_name</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsEditScale</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">gridLines</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">display</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">))</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsAddScale</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s2">"linear"</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="s2">"right"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfPremades</span><span class="o">$</span><span class="n">prop</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"proportion"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfPremades</span><span class="o">$</span><span class="n">n</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">"number of games"</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>  <span class="o">%&gt;%</span>
+  <span class="n">cjsLegend</span><span class="p">()</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsTooltips</span><span class="p">(</span><span class="n">callbacks</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="n">htmlwidgets</span><span class="o">::</span><span class="n">JS</span><span class="p">(</span><span class="s2">"function(tooltipItem, data) {
+  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+  var res = datasetLabel + ': ' + tooltipItem.yLabel;
+  if (datasetLabel == 'proportion')  res = res + '%'
+  return res;}"</span><span class="p">)))</span></code></pre></figure>
+
+<!--html_preserve-->
+<div id="htmlwidget-8682-container" class="htmlwidget_container">
+<canvas id="htmlwidget-8682" class="chartjs html-widget" style="width:504px;height:300px;" width="504" height="300px"></canvas>
+</div>
+<script type="application/json" data-for="htmlwidget-8682">{"x":{"options":{"responsive":true,"maintainAspectRatio":true,"legend":{"display":true},"tooltips":{"callbacks":{"label":"function(tooltipItem, data) {\n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';\n  var res = datasetLabel + ': ' + tooltipItem.yLabel;\n  if (datasetLabel == 'proportion')  res = res + '%'\n  return res;}"}}},"palette":"Paired","debug":false,"type":"bar","data":{"labels":["Zedlol","Teramur","Blazing Flamberg","TehJester","HappyFTN","Luciha","Flarus","Dingouze","Legolino","MOAR LUCK PLS"],"datasets":[{"data":[38.24,31.37,27.45,20.59,11.76,8.82,4.9,2.94,2.94,2.94],"borderColor":"#000000","backgroundColor":"#A6CEE3","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#1F78B4","label":"proportion","type":"bar"},{"data":[39,32,28,21,12,9,5,3,3,3],"borderColor":"#000000","backgroundColor":"#B2DF8A","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#33A02C","label":"number of games","type":"bar","yAxisID":"y-axis-1"}]},"scales":{"x":[{"gridLines":{"display":false},"type":"category","stacked":false}],"y":[{"type":"linear","stacked":false},{"type":"linear","position":"right"}]}},"evals":["options.tooltips.callbacks.label"],"jsHooks":[]}</script>
+<!--/html_preserve-->
+
+<h4 id="distribution-of-the-number-of-premades">Distribution of the number of premades</h4>
+
+<p>Next, let’s take a look at the number of friends I usually play with.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dfSoloVsPremades</span> <span class="o">&lt;-</span> <span class="n">all_matches</span> <span class="o">%&gt;%</span> 
+  <span class="n">group_by</span><span class="p">(</span><span class="n">match_id</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">summarise</span><span class="p">(</span><span class="n">premade_number</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">summoner_name</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">dfPremades</span><span class="o">$</span><span class="n">summoner_name</span><span class="p">),</span> 
+            <span class="n">win</span> <span class="o">=</span> <span class="n">winner</span><span class="p">[</span><span class="n">summoner_name</span> <span class="o">==</span> <span class="n">current_summoner_name</span><span class="p">])</span> <span class="o">%&gt;%</span> 
+  <span class="n">group_by</span><span class="p">(</span><span class="n">premade_number</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">summarise</span><span class="p">(</span><span class="n">n_wins</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">win</span><span class="p">),</span> <span class="n">n_games</span> <span class="o">=</span> <span class="n">n</span><span class="p">(),</span> 
+            <span class="n">prop_win</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">n_wins</span> <span class="o">/</span> <span class="n">n_games</span> <span class="o">*</span> <span class="m">100</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+  <span class="n">ungroup</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+  <span class="n">mutate</span><span class="p">(</span><span class="n">prop_games</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">n_games</span> <span class="o">/</span> <span class="n">sum</span><span class="p">(</span><span class="n">n_games</span><span class="p">)</span> <span class="o">*</span> <span class="m">100</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+
+
+
+<span class="n">chartjs</span><span class="p">(</span><span class="n">height</span> <span class="o">=</span> <span class="n">chart_size</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsBar</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="n">dfSoloVsPremades</span><span class="o">$</span><span class="n">premade_number</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfSoloVsPremades</span><span class="o">$</span><span class="n">prop_games</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsEditScale</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">gridLines</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">display</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsEditScale</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">ticks</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">beginAtZero</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsTooltips</span><span class="p">(</span><span class="n">callbacks</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="n">htmlwidgets</span><span class="o">::</span><span class="n">JS</span><span class="p">(</span><span class="s2">"function(tooltipItem, data) { 
+  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+  return tooltipItem.yLabel + '%';}"</span><span class="p">)))</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsTitle</span><span class="p">(</span><span class="s2">"percentage of games played by group size"</span><span class="p">)</span></code></pre></figure>
+
+<!--html_preserve-->
+<div id="htmlwidget-6237-container" class="htmlwidget_container">
+<canvas id="htmlwidget-6237" class="chartjs html-widget" style="width:504px;height:300px;" width="504" height="300px"></canvas>
+</div>
+<script type="application/json" data-for="htmlwidget-6237">{"x":{"options":{"responsive":true,"maintainAspectRatio":true,"legend":{"display":false},"tooltips":{"callbacks":{"label":"function(tooltipItem, data) { \n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';\n  return tooltipItem.yLabel + '%';}"}},"title":{"display":true,"text":"percentage of games played by group size"}},"palette":"Paired","debug":false,"type":"bar","data":{"labels":[1,2,3,4,5],"datasets":[{"data":[39.22,9.8,21.57,18.63,10.78],"borderColor":"#000000","backgroundColor":"#A6CEE3","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#1F78B4","type":"bar"}]},"scales":{"x":[{"gridLines":{"display":false},"type":"category","stacked":false}],"y":[{"ticks":{"beginAtZero":true},"type":"linear","stacked":false}]}},"evals":["options.tooltips.callbacks.label"],"jsHooks":[]}</script>
+<!--/html_preserve-->
+
+<p><strong>Almost 60% of my games have been played with one or more friends</strong>. If we consider duo queue as part of the original solo queue, about 50% of my ranked games could not have been played under this scheme. But does playing with friends actually make me win more ?</p>
+
+<h4 id="win-percentage-with-premades">Win percentage with premades</h4>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">chartjs</span><span class="p">(</span><span class="n">height</span> <span class="o">=</span> <span class="n">chart_size</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsBar</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="n">dfSoloVsPremades</span><span class="o">$</span><span class="n">premade_number</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfSoloVsPremades</span><span class="o">$</span><span class="n">prop_win</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsEditScale</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">gridLines</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">display</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsEditScale</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">ticks</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">beginAtZero</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsTooltips</span><span class="p">(</span><span class="n">callbacks</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="n">htmlwidgets</span><span class="o">::</span><span class="n">JS</span><span class="p">(</span><span class="s2">"function(tooltipItem, data) { 
+  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+  return tooltipItem.yLabel + '%';}"</span><span class="p">)))</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsTitle</span><span class="p">(</span><span class="s2">"win percentage by group size"</span><span class="p">)</span></code></pre></figure>
+
+<!--html_preserve-->
+<div id="htmlwidget-5471-container" class="htmlwidget_container">
+<canvas id="htmlwidget-5471" class="chartjs html-widget" style="width:504px;height:300px;" width="504" height="300px"></canvas>
+</div>
+<script type="application/json" data-for="htmlwidget-5471">{"x":{"options":{"responsive":true,"maintainAspectRatio":true,"legend":{"display":false},"tooltips":{"callbacks":{"label":"function(tooltipItem, data) { \n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';\n  return tooltipItem.yLabel + '%';}"}},"title":{"display":true,"text":"win percentage by group size"}},"palette":"Paired","debug":false,"type":"bar","data":{"labels":[1,2,3,4,5],"datasets":[{"data":[57.5,60,54.55,52.63,45.45],"borderColor":"#000000","backgroundColor":"#A6CEE3","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#1F78B4","type":"bar"}]},"scales":{"x":[{"gridLines":{"display":false},"type":"category","stacked":false}],"y":[{"ticks":{"beginAtZero":true},"type":"linear","stacked":false}]}},"evals":["options.tooltips.callbacks.label"],"jsHooks":[]}</script>
+<!--/html_preserve-->
+
+<p>It appears that the more friends I play with, the less I win (except for the duo case). Arguably, the sample size is small but still, that was not what I was expecting at all. When I’m playing with friends, we usually are on <a href="https://github.com/mumble-voip/mumble">Mumble</a> in order to coordinate better so this <em>should</em> technically give us an edge, except if the n-man premade opposite us is also on VoIP.</p>
+
+<p>This does not happen to be the case but maybe the reason is not that me or any particular friend of mine actually sucks at the game. I happen to play only two of the five roles that I presented at the beginning and I play each of those about the same amount : these roles are <strong>jungle</strong> and <strong>support</strong>. But do I play them the same amount whatever our group number is ?</p>
+
+<h4 id="role-repartition-and-win-rate">Role repartition and win rate</h4>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dfSoloVsPremadesByRole</span> <span class="o">&lt;-</span> <span class="n">all_matches</span> <span class="o">%&gt;%</span> 
+  <span class="n">group_by</span><span class="p">(</span><span class="n">match_id</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">summarise</span><span class="p">(</span><span class="n">premade_number</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">summoner_name</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">dfPremades</span><span class="o">$</span><span class="n">summoner_name</span><span class="p">),</span> 
+            <span class="n">win</span> <span class="o">=</span> <span class="n">winner</span><span class="p">[</span><span class="n">summoner_name</span> <span class="o">==</span> <span class="n">current_summoner_name</span><span class="p">],</span>
+            <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="p">[</span><span class="n">summoner_name</span> <span class="o">==</span> <span class="n">current_summoner_name</span><span class="p">])</span> <span class="o">%&gt;%</span> 
+  <span class="n">group_by</span><span class="p">(</span><span class="n">premade_number</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">summarise</span><span class="p">(</span><span class="n">prop_win</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">win</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">()</span> <span class="o">*</span> <span class="m">100</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="n">n_games</span> <span class="o">=</span> <span class="n">n</span><span class="p">())</span> <span class="o">%&gt;%</span> 
+  <span class="n">ungroup</span><span class="p">()</span>
+
+<span class="n">dfSoloVsPremadesByRoleWR</span> <span class="o">&lt;-</span> <span class="n">dfSoloVsPremadesByRole</span> <span class="o">%&gt;%</span> 
+  <span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">n_games</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">tidyr</span><span class="o">::</span><span class="n">spread</span><span class="p">(</span><span class="n">role</span><span class="p">,</span> <span class="n">prop_win</span><span class="p">)</span>
+
+<span class="n">dfSoloVsPremadesByRoleNG</span> <span class="o">&lt;-</span> <span class="n">dfSoloVsPremadesByRole</span> <span class="o">%&gt;%</span> 
+  <span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">prop_win</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">tidyr</span><span class="o">::</span><span class="n">spread</span><span class="p">(</span><span class="n">role</span><span class="p">,</span> <span class="n">n_games</span><span class="p">)</span>
+
+<span class="n">chartjs</span><span class="p">(</span><span class="n">height</span> <span class="o">=</span> <span class="n">chart_size</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsBar</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="n">dfSoloVsPremadesByRoleWR</span><span class="o">$</span><span class="n">premade_number</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsAddScale</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s2">"linear"</span><span class="p">,</span> <span class="n">position</span> <span class="o">=</span> <span class="s2">"right"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfSoloVsPremadesByRoleWR</span><span class="o">$</span><span class="n">jungle</span><span class="p">,</span> 
+            <span class="n">label</span> <span class="o">=</span> <span class="s2">"win rate - jungle"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfSoloVsPremadesByRoleWR</span><span class="o">$</span><span class="n">support</span><span class="p">,</span> 
+            <span class="n">label</span> <span class="o">=</span> <span class="s2">"win rate - support"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfSoloVsPremadesByRoleNG</span><span class="o">$</span><span class="n">jungle</span><span class="p">,</span> 
+            <span class="n">label</span> <span class="o">=</span> <span class="s2">"games - jungle"</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsSeries</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dfSoloVsPremadesByRoleNG</span><span class="o">$</span><span class="n">support</span><span class="p">,</span> 
+            <span class="n">label</span> <span class="o">=</span> <span class="s2">"games - support"</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsEditScale</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">gridLines</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">display</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsEditScale</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">ticks</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">beginAtZero</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsEditScale</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">ticks</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">beginAtZero</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">),</span> 
+               <span class="n">gridLines</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">display</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">))</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsTitle</span><span class="p">(</span><span class="s2">"win rate by group size and role"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">cjsLegend</span><span class="p">()</span></code></pre></figure>
+
+<!--html_preserve-->
+<div id="htmlwidget-5831-container" class="htmlwidget_container">
+<canvas id="htmlwidget-5831" class="chartjs html-widget" style="width:504px;height:300px;" width="504" height="300px"></canvas>
+</div>
+<script type="application/json" data-for="htmlwidget-5831">{"x":{"options":{"responsive":true,"maintainAspectRatio":true,"legend":{"display":true},"title":{"display":true,"text":"win rate by group size and role"}},"palette":"Paired","debug":false,"type":"bar","data":{"labels":[1,2,3,4,5],"datasets":[{"data":[33.33,33.33,57.14,53.33,50],"borderColor":"#000000","backgroundColor":"#A6CEE3","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#1F78B4","label":"win rate - jungle","type":"bar"},{"data":[61.76,80,50,66.67,33.33],"borderColor":"#000000","backgroundColor":"#B2DF8A","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#33A02C","label":"win rate - support","type":"bar"},{"data":[6,3,14,15,8],"borderColor":"#000000","backgroundColor":"#FB9A99","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#E31A1C","label":"games - jungle","type":"bar","yAxisID":"y-axis-1"},{"data":[34,5,8,3,3],"borderColor":"#000000","backgroundColor":"#FDBF6F","hoverBorderColor":"rgba(255,255,255,1)","hoverBackgroundColor":"#FF7F00","label":"games - support","type":"bar","yAxisID":"y-axis-1"}]},"scales":{"x":[{"gridLines":{"display":false},"type":"category","stacked":false}],"y":[{"ticks":{"beginAtZero":true},"type":"linear","stacked":false},{"ticks":{"beginAtZero":true},"gridLines":{"display":false},"type":"linear","position":"right"}]}},"evals":[],"jsHooks":[]}</script>
+<!--/html_preserve-->
+
+<p>Well, it’s right there: when playing solo or duo, I play much more as a support than a jungler with a win rate that is much higher. When in a group of 3 or more, I usually play jungle more and my win rate is not that high.</p>
+
+<p>My playing support more when solo or duo is not that surprising: when queuing for a ranked game, you can select two roles you want to play and the matchmaking algorithm finds a match for you where you get to play one of these roles (everyone in the match gets to play of their two selected roles). However, support players are much scarcer than any of the other roles as illustrated by <a href="https://www.reddit.com/r/leagueoflegends/comments/49tr9l/i_queued_for_100_normal_draft_games_in_the_past_2/">this reddit post</a> so when selecting jungle and support, I tend to play a lot of support games.</p>
+
+<p>When in a group of friends, we usually take turns playing the support role as several of us enjoy it and not many of us actually enjoy playing jungle so I’m often tasked with playing it.</p>
+
+<p>This concludes this first blog post, I’d love to hear your feedback if you have any.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        <!-- 
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#games" class="page__taxonomy-item" rel="tag">games</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#leagueoflegends" class="page__taxonomy-item" rel="tag">leagueoflegends</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#r" class="page__taxonomy-item" rel="tag">r</a>
+    
+    </span>
+  </p>
+
+ -->
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-05-21T14:55:44+02:00">May 21, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=/r/premades-lol/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=/r/premades-lol/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=/r/premades-lol/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=/r/premades-lol/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  <h4 class="page__comments-title">Leave a Comment</h4>
+  
+</div>
+    
+  </article>
+
+  
+  
+</div>
+
+
+<script src="/htmlwidgets_deps/htmlwidgets-0.6/htmlwidgets.js"></script>
+<script src="/htmlwidgets_deps/Moment.js-2.13.0/moment-with-locales.min.js"></script>
+<script src="/htmlwidgets_deps/Chart.js-2.1.0/Chart.min.js"></script>
+<link href="/htmlwidgets_deps/chartjs-0.3.3/chartjs.css" rel="stylesheet">
+<script src="/htmlwidgets_deps/chartjs-binding-0.3.3.9000/chartjs.js"></script>
+
+
+    <div class="page__footer">
+      <footer>
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/tutuchan"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/tutuchan"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2016 Pierre Formont. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+    <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+  </body>
+</html>
