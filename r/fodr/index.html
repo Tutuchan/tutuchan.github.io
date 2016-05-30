@@ -1,0 +1,881 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Introducing fodr: a package for French open data in R - A gameR perspective</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="A gameR perspective">
+<meta property="og:title" content="Introducing fodr: a package for French open data in R">
+
+
+
+
+  <meta property="og:description" content="Nowadays, more and more government organisations subscribe to the open data movement and some have done so in France, in the hopes that new services or insights would come from the analysis of this data.">
+
+
+
+  <meta name="twitter:site" content="@tutuchan">
+  <meta name="twitter:title" content="Introducing fodr: a package for French open data in R">
+  <meta name="twitter:description" content="Nowadays, more and more government organisations subscribe to the open data movement and some have done so in France, in the hopes that new services or insights would come from the analysis of this data.">
+  <meta name="twitter:url" content="">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-05-30T18:49:30+02:00">
+  
+  
+    <link rel="prev" href="/r/premades-lol/" title="A quick look at win rates in premade groups in League of Legends">
+  
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "person",
+      "name" : "Pierre Formont",
+      "url" : null,
+      "sameAs" : ["https://twitter.com/tutuchan"]
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="A gameR perspective Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="/">A gameR perspective</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="/blog/">blog</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="/about/">About</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="/images/bio-photo.jpg" class="author__avatar" alt="Pierre Formont">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Pierre Formont</h3>
+    <p class="author__bio">Gamer, data person, R enthusiast.</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> Paris, France</li>
+      
+      
+      
+        <li><a href="mailto:pierre.formont@gmail.com"><i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+        <li><a href="https://twitter.com/tutuchan"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/tutuchan"><i class="fa fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://steamcommunity.com/profiles/76561198001177507"><i class="fa fa-fw fa-steam-square" aria-hidden="true"></i> Steam</a></li>
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introducing fodr: a package for French open data in R">
+    <meta itemprop="description" content="Nowadays, more and more government organisations subscribe to the open data movement and some have done so in France, in the hopes that new services or insights would come from the analysis of this data.">
+    <meta itemprop="datePublished" content="May 30, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Introducing fodr: a package for French open data in R
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  9 minutes read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <aside class="sidebar__right">
+<nav class="toc">
+    <header><h4 class="nav__title"><i class="fa fa-file-text"></i> Table of contents</h4></header>
+<ul class="toc__menu" id="markdown-toc">
+  <li><a href="#the-package" id="markdown-toc-the-package">The package</a>    <ul>
+      <li><a href="#getting-the-package" id="markdown-toc-getting-the-package">Getting the package</a></li>
+      <li><a href="#available-portals" id="markdown-toc-available-portals">Available portals</a></li>
+      <li><a href="#structure" id="markdown-toc-structure">Structure</a></li>
+    </ul>
+  </li>
+  <li><a href="#portals" id="markdown-toc-portals">Portals</a>    <ul>
+      <li><a href="#instantiation" id="markdown-toc-instantiation">Instantiation</a></li>
+      <li><a href="#fetching-data---the-search-method" id="markdown-toc-fetching-data---the-search-method">Fetching data - the search method</a></li>
+    </ul>
+  </li>
+  <li><a href="#datasets" id="markdown-toc-datasets">Datasets</a>    <ul>
+      <li><a href="#instantiation-1" id="markdown-toc-instantiation-1">Instantiation</a></li>
+      <li><a href="#fetching-data" id="markdown-toc-fetching-data">Fetching data</a>        <ul>
+          <li><a href="#the-getrecords-method" id="markdown-toc-the-getrecords-method">The get_records method</a>            <ul>
+              <li><a href="#refine-and-exclude" id="markdown-toc-refine-and-exclude">refine and exclude</a></li>
+              <li><a href="#sort" id="markdown-toc-sort">sort</a></li>
+              <li><a href="#q" id="markdown-toc-q">q</a></li>
+              <li><a href="#geofilterdistance-and-geofilterpolygon" id="markdown-toc-geofilterdistance-and-geofilterpolygon">geofilter.distance and geofilter.polygon</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#use-in-leaflet" id="markdown-toc-use-in-leaflet">Use in leaflet</a></li>
+  <li><a href="#future-work" id="markdown-toc-future-work">Future work</a></li>
+</ul>
+
+  </nav>
+</aside>
+
+<blockquote>
+  <p>Open data is the idea that some data should be freely available to everyone to use and republish as they wish, without restrictions from copyright, patents or other mechanisms of control.</p>
+</blockquote>
+
+<p><a href="http://link.springer.com/chapter/10.1007%2F978-3-540-76298-0_52">Source</a> from <a href="https://en.wikipedia.org/wiki/Open_data">Wikipedia</a>. Post image from <a href="http://www.rudebaguette.com/">Rude Baguette</a>.</p>
+
+<p>Nowadays, more and more government organisations subscribe to the open data movement and some have done so in France, in the hope that new services or insights would come from the analysis of this data. To name a few :</p>
+
+<ul>
+  <li><a href="https://www.data.gouv.fr/en/">the French government</a>,</li>
+  <li>the city of <a href="http://opendata.paris.fr/">Paris</a>,</li>
+  <li><a href="https://data.erdf.fr/page/accueil/">ERDF</a>, the French electricity distribution company,</li>
+  <li><a href="https://data.sncf.com/">SNCF</a>, the French railroad company</li>
+  <li>etc</li>
+</ul>
+
+<p><a href="https://www.opendatasoft.com/a-comprehensive-list-of-all-open-data-portals-around-the-world/">Recently</a>, due to the ever-increasing number of open data portals, the <a href="http://opendatainception.io/">Open Data Inception</a> portal was created by the <a href="https://www.opendatasoft.com/">OpenDataSoft</a> company. The aim of this portal is to provide a comprehensive list of open data portals around the world.</p>
+
+<p>As it happens, many of the French open data portals are available through the OpenDataSoft <a href="https://www.opendatasoft.com/open-data-solutions/">Open Data platform</a> and thus share a common API.</p>
+
+<p>Some of the datasets on these portals have caught my eyes recently and I downloaded a few of them to tinker with them on my spare time but I quickly realised that, even though the API is well designed, the process is a bit cumbersome if you want to use any data in R as you have to go on a specific portal, find the dataset you’re looking for, download it to some place on your disk and then go back to R and import it.</p>
+
+<p>I thought by someone would have created a package to simplify this but I was mistaken. Thus, <code class="highlighter-rouge">fodr</code> was born.</p>
+
+<h2 id="the-package">The package</h2>
+
+<h3 id="getting-the-package">Getting the package</h3>
+
+<p>The package is hosted on <a href="https://github.com/Tutuchan/fodr">Github</a> and can be installed <em>via</em> <code class="highlighter-rouge">devtools</code>:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">devtools</span><span class="o">::</span><span class="n">install_github</span><span class="p">(</span><span class="s2">"tutuchan/fodr"</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="available-portals">Available portals</h3>
+
+<p>The list of currently available portals can be accessed with the <code class="highlighter-rouge">list_portals()</code> function:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">fodr</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">leaflet</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">list_portals</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+  <span class="n">select</span><span class="p">(</span><span class="n">portals</span><span class="p">,</span> <span class="n">base_urls</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Source: local data frame [13 x 2]
+## 
+##        portals                                     base_urls
+##          &lt;chr&gt;                                         &lt;chr&gt;
+## 1         ratp                           http://data.ratp.fr
+## 2  iledefrance                    http://data.iledefrance.fr
+## 3   infogreffe                      http://datainfogreffe.fr
+## 4     toulouse            https://data.toulouse-metropole.fr
+## 5         star                  https://data.explore.star.fr
+## 6         issy                          http://data.issy.com
+## 7         stif                     http://opendata.stif.info
+## 8        paris                      http://opendata.paris.fr
+## 9           04            http://tourisme04.opendatasoft.com
+## 10          62            http://tourisme62.opendatasoft.com
+## 11          92            https://opendata.hauts-de-seine.fr
+## 12       enesr http://data.enseignementsup-recherche.gouv.fr
+## 13        erdf                          https://data.erdf.fr</code></pre></figure>
+
+<p>At the time of writing only 13 portals are available through <code class="highlighter-rouge">fodr</code> for several reasons :</p>
+
+<ul>
+  <li><code class="highlighter-rouge">fodr</code> only handles the OpenDataSoft API and many of the French open data portals use the <a href="http://www.esri.com/software/arcgis/arcgisonline/arcgis-open-data">ArcGIS Open platform</a>,</li>
+  <li>some do not have an API, like the <a href="http://data.gouv.fr/">Data.gouv</a> or the <a href="http://data.grandlyon.com/">Grand Lyon</a> website,</li>
+  <li>some use the <a href="http://www.navitia.io/">navitia.io</a> API, like the <a href="https://data.sncf.com/">SNCF</a> website,</li>
+  <li>some simply do not have data</li>
+</ul>
+
+<p>To obtain this list, I looked at the Open Data Inception dataset and tried to access a method on the API to see if it returned any results and curated the remaining datasets but I’m pretty sure there is a better way to do it:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">jsonlite</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">curl</span><span class="p">)</span>
+
+<span class="n">number_of_datasets</span> <span class="o">&lt;-</span>  <span class="n">fromJSON</span><span class="p">(</span><span class="s2">"http://public.opendatasoft.com/api/records/1.0/search/?dataset=open-data-sources&amp;facet=country&amp;refine.country=France&amp;nrows=1"</span><span class="p">)</span><span class="o">$</span><span class="n">nhits</span>
+<span class="n">listDatasets</span> <span class="o">&lt;-</span>  <span class="n">fromJSON</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"http://public.opendatasoft.com/api/records/1.0/search/?dataset=open-data-sources&amp;facet=country&amp;refine.country=France&amp;rows="</span><span class="p">,</span> <span class="n">number_of_datasets</span><span class="p">))</span>
+
+<span class="n">d</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">number_of_datasets</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="s2">"Arcgis"</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">listDatasets</span><span class="o">$</span><span class="n">records</span><span class="o">$</span><span class="n">fields</span><span class="o">$</span><span class="n">description</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">return</span><span class="p">(</span><span class="n">NULL</span><span class="p">)</span>
+  <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">listDatasets</span><span class="o">$</span><span class="n">records</span><span class="o">$</span><span class="n">fields</span><span class="o">$</span><span class="n">url</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">fetch_data</span> <span class="o">&lt;-</span> <span class="n">purrr</span><span class="o">::</span><span class="n">safely</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="s2">"nhits"</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">names</span><span class="p">(</span><span class="n">fromJSON</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">"/api/datasets/1.0/search/"</span><span class="p">))))</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">is.null</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">$</span><span class="n">error</span><span class="p">))</span> <span class="n">dplyr</span><span class="o">::</span><span class="n">data_frame</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">listDatasets</span><span class="o">$</span><span class="n">records</span><span class="o">$</span><span class="n">fields</span><span class="o">$</span><span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">url</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span> <span class="k">else</span> <span class="n">NULL</span>
+<span class="p">})</span>
+
+<span class="n">df</span> <span class="o">&lt;-</span> <span class="n">dplyr</span><span class="o">::</span><span class="n">bind_rows</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="structure">Structure</h3>
+
+<p>I created two classes using the <a href="https://github.com/wch/R6">R6</a>: <strong>FODRPortal</strong> and <strong>FODRDataset</strong>. I also created two wrappers around these classes to skip the <code class="highlighter-rouge">&lt;class&gt;$new(...)</code> syntax that I’m not a fan of:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># Instantiate a FODRPortal
+</span><span class="n">fodr_portal</span><span class="p">(</span><span class="n">portal</span><span class="p">)</span>
+
+<span class="c1"># Instantiate a FODRDataset
+</span><span class="n">fodr_dataset</span><span class="p">(</span><span class="n">portal</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span></code></pre></figure>
+
+<h2 id="portals">Portals</h2>
+
+<h3 id="instantiation">Instantiation</h3>
+
+<p>Access to a portal is granted through the <code class="highlighter-rouge">fodr_portal</code> function:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">portal</span> <span class="o">&lt;-</span> <span class="n">fodr_portal</span><span class="p">(</span><span class="s2">"paris"</span><span class="p">)</span>
+<span class="n">portal</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## FODRPortal object
+## --------------------------------------------------------------------
+## Portal: paris 
+## Number of datasets: 175 
+## Themes:
+##   - Administration
+##   - Citoyens
+##   - Commerces
+##   - Culture
+##   - Déplacements
+##   - Environnement
+##   - Finances
+##   - Services
+##   - Urbanisme 
+## --------------------------------------------------------------------</code></pre></figure>
+
+<p>The <code class="highlighter-rouge">print</code> method has been overloaded to show useful information about the portal. Here, it shows that this portal has 175 datasets divided among several themes.</p>
+
+<h3 id="fetching-data---the-search-method">Fetching data - the search method</h3>
+
+<p>For a <code class="highlighter-rouge">FODRPortal</code>, there is only one method: <code class="highlighter-rouge">search</code>. It leverages the <strong>OpenDataSoft</strong> <a href="">catalog API</a> in order to find relevant datasets. By default, calling the <code class="highlighter-rouge">search</code> method will retrieve <strong>all</strong> elements that satisfy the query, contrary to the <strong>OpenDataSoft</strong> API that only retrieves 10.</p>
+
+<p>There are several arguments to this function that are detailed in the <strong>OpenDataSoft</strong> documentation. I also added another argument, <em>theme</em>, that allows to return all datasets that fall under a specific theme.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">list_datasets</span> <span class="o">&lt;-</span> <span class="n">portal</span><span class="o">$</span><span class="n">search</span><span class="p">(</span><span class="n">theme</span> <span class="o">=</span> <span class="s2">"Culture"</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## 24 datasets found ...</code></pre></figure>
+
+<p>Datasets obtained by this method are directly returned as a list but also stored in the <code class="highlighter-rouge">data</code> field of the <code class="highlighter-rouge">portal</code> object:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">list_datasets</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## FODRDataset object
+## --------------------------------------------------------------------
+## Dataset id: postes-publics-des-bibliotheques-de-pret 
+## Theme: Culture 
+## Keywords: postes publics, ordinateurs, catalogues en ligne, bibliothèques, prêt 
+## Publisher: Service Informatique des Bibliothèques 
+## --------------------------------------------------------------------
+## Number of records: 230 
+## Number of files: 0 
+## Modified: 2014-07-30 
+## Facets: etablissement, type_de_poste_public 
+## Sortables: nombre_d_ordinateurs 
+## --------------------------------------------------------------------</code></pre></figure>
+
+<h2 id="datasets">Datasets</h2>
+
+<h3 id="instantiation-1">Instantiation</h3>
+
+<p>As shown just before, datasets can be retrieved either from a call to <code class="highlighter-rouge">portal$search</code> or, if you know the portal and id, by a call to <code class="highlighter-rouge">fodr_dataset</code>:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># dts &lt;- fodr_dataset(portal = "paris", id = list_datasets[[1]]$id)
+</span><span class="n">dts</span> <span class="o">&lt;-</span> <span class="n">fodr_dataset</span><span class="p">(</span><span class="n">portal</span> <span class="o">=</span> <span class="s2">"paris"</span><span class="p">,</span> <span class="n">id</span> <span class="o">=</span> <span class="s2">"postes-publics-des-bibliotheques-de-pret"</span><span class="p">)</span>
+<span class="n">dts</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## FODRDataset object
+## --------------------------------------------------------------------
+## Dataset id: postes-publics-des-bibliotheques-de-pret 
+## Theme: Culture 
+## Keywords: postes publics, ordinateurs, catalogues en ligne, bibliothèques, prêt 
+## Publisher: Service Informatique des Bibliothèques 
+## --------------------------------------------------------------------
+## Number of records: 230 
+## Number of files: 0 
+## Modified: 2014-07-30 
+## Facets: etablissement, type_de_poste_public 
+## Sortables: nombre_d_ordinateurs 
+## --------------------------------------------------------------------</code></pre></figure>
+
+<p>Then again, the <code class="highlighter-rouge">print</code> method has been overloaded to show useful information about the dataset:</p>
+
+<ul>
+  <li>number of records,</li>
+  <li>number of files,</li>
+  <li>keywords,</li>
+  <li>facets: columns you can filter on,</li>
+  <li>sortables: columns you can sort on</li>
+</ul>
+
+<h3 id="fetching-data">Fetching data</h3>
+
+<p>There are two methods to fetch data from a dataset: <code class="highlighter-rouge">get_records</code> and <code class="highlighter-rouge">get_attachments</code>.</p>
+
+<h4 id="the-getrecords-method">The get_records method</h4>
+
+<p>The <code class="highlighter-rouge">get_records</code> method the <a href="https://docs.opendatasoft.com/en/api/records_api.html#records-download-api">Records download API</a> and again fetches all available records instead of the first 10.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dfRecords</span> <span class="o">&lt;-</span> <span class="n">dts</span><span class="o">$</span><span class="n">get_records</span><span class="p">()</span>
+<span class="n">dfRecords</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Source: local data frame [230 x 4]
+## 
+##       type_de_poste_public nombre_d_ordinateurs   etablissement
+##                      &lt;chr&gt;                &lt;int&gt;           &lt;chr&gt;
+## 1                Catalogue                    3    Aimé Césaire
+## 2                Catalogue                    2          Amélie
+## 3  Poste de passage adulte                    2          Amélie
+## 4           Poste jeunesse                    2          Amélie
+## 5           Poste jeunesse                    3   Andrée Chedid
+## 6             Poste adulte                    3     Batignolles
+## 7  Poste de passage adulte                    3          Buffon
+## 8                Catalogue                    2 Charlotte Delbo
+## 9                Catalogue                    8 Robert Sabatier
+## 10            Poste adulte                    8 Robert Sabatier
+## ..                     ...                  ...             ...
+## Variables not shown: geom_x_y &lt;list&gt;.</code></pre></figure>
+
+<h5 id="refine-and-exclude">refine and exclude</h5>
+
+<p>The <em>refine</em> and <em>exclude</em> arguments are used to filter results on facets:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dts</span><span class="o">$</span><span class="n">get_records</span><span class="p">(</span><span class="n">refine</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">etablissement</span> <span class="o">=</span> <span class="s2">"Amélie"</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Source: local data frame [5 x 4]
+## 
+##        type_de_poste_public nombre_d_ordinateurs etablissement
+##                       &lt;chr&gt;                &lt;int&gt;         &lt;chr&gt;
+## 1                 Catalogue                    2        Amélie
+## 2   Poste de passage adulte                    2        Amélie
+## 3            Poste jeunesse                    2        Amélie
+## 4              Poste adulte                    3        Amélie
+## 5 Poste de passage jeunesse                    1        Amélie
+## Variables not shown: geom_x_y &lt;list&gt;.</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dts</span><span class="o">$</span><span class="n">get_records</span><span class="p">(</span><span class="n">exclude</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">etablissement</span> <span class="o">=</span> <span class="s2">"Amélie"</span><span class="p">))</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Source: local data frame [225 x 4]
+## 
+##       type_de_poste_public nombre_d_ordinateurs   etablissement
+##                      &lt;chr&gt;                &lt;int&gt;           &lt;chr&gt;
+## 1                Catalogue                    3    Aimé Césaire
+## 2           Poste jeunesse                    3   Andrée Chedid
+## 3             Poste adulte                    3     Batignolles
+## 4  Poste de passage adulte                    3          Buffon
+## 5                Catalogue                    2 Charlotte Delbo
+## 6                Catalogue                    8 Robert Sabatier
+## 7             Poste adulte                    8 Robert Sabatier
+## 8           Poste jeunesse                    2         Diderot
+## 9  Poste de passage adulte                    1          Crimée
+## 10               Catalogue                    1          Drouot
+## ..                     ...                  ...             ...
+## Variables not shown: geom_x_y &lt;list&gt;.</code></pre></figure>
+
+<h5 id="sort">sort</h5>
+
+<p>The <em>sort</em> argument is used to sort results on sortables:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dts</span><span class="o">$</span><span class="n">get_records</span><span class="p">(</span><span class="n">sort</span> <span class="o">=</span> <span class="s2">"nombre_d_ordinateurs"</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Source: local data frame [230 x 4]
+## 
+##    type_de_poste_public nombre_d_ordinateurs         etablissement
+##                   &lt;chr&gt;                &lt;int&gt;                 &lt;chr&gt;
+## 1          Poste adulte                   36      Marguerite Duras
+## 2          Poste adulte                   14  Marguerite Yourcenar
+## 3             Catalogue                   13  Marguerite Yourcenar
+## 4          Poste adulte                   13         André Malraux
+## 5          Poste adulte                   12 Jacqueline de Romilly
+## 6          Poste adulte                   12          Vaclav Havel
+## 7          Poste adulte                   12           Hélène Berr
+## 8          Poste adulte                   12        Edmond Rostand
+## 9          Poste adulte                   11         Andrée Chedid
+## 10         Poste adulte                   11                Buffon
+## ..                  ...                  ...                   ...
+## Variables not shown: geom_x_y &lt;list&gt;.</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dts</span><span class="o">$</span><span class="n">get_records</span><span class="p">(</span><span class="n">sort</span> <span class="o">=</span> <span class="s2">"-nombre_d_ordinateurs"</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Source: local data frame [230 x 4]
+## 
+##         type_de_poste_public nombre_d_ordinateurs    etablissement
+##                        &lt;chr&gt;                &lt;int&gt;            &lt;chr&gt;
+## 1    Poste de passage adulte                    1           Crimée
+## 2                  Catalogue                    1           Drouot
+## 3                  Catalogue                    1           Europe
+## 4  Poste de passage jeunesse                    1      Hélène Berr
+## 5             Poste jeunesse                    1           Lancry
+## 6    Poste de passage adulte                    1  L'Heure Joyeuse
+## 7                  Catalogue                    1 Maurice Genevoix
+## 8    Poste de passage adulte                    1 Maurice Genevoix
+## 9    Poste de passage adulte                    1              MMP
+## 10                 Catalogue                    1          Mortier
+## ..                       ...                  ...              ...
+## Variables not shown: geom_x_y &lt;list&gt;.</code></pre></figure>
+
+<h5 id="q">q</h5>
+
+<p>The <em>q</em> argument is used to perform full-text search:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dts</span><span class="o">$</span><span class="n">get_records</span><span class="p">(</span><span class="n">q</span> <span class="o">=</span> <span class="s2">"GENEVOIX"</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Source: local data frame [4 x 4]
+## 
+##      type_de_poste_public nombre_d_ordinateurs    etablissement
+##                     &lt;chr&gt;                &lt;int&gt;            &lt;chr&gt;
+## 1            Poste adulte                    1 Maurice Genevoix
+## 2          Poste jeunesse                    3 Maurice Genevoix
+## 3               Catalogue                    1 Maurice Genevoix
+## 4 Poste de passage adulte                    1 Maurice Genevoix
+## Variables not shown: geom_x_y &lt;list&gt;.</code></pre></figure>
+
+<h5 id="geofilterdistance-and-geofilterpolygon">geofilter.distance and geofilter.polygon</h5>
+
+<p>These are used to filter results based on their location:</p>
+
+<ul>
+  <li><em>geofilter.distance</em> takes a numeric vector of three elemnts: longitude and latitude of the center of a circle and radius of the circle (in meters)</li>
+  <li><em>geofilter.polygon</em> takes a data.frame of two columns named <em>lat</em> and <em>lon</em> which bounds the area where results are allowed to be</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dfFilterDistance</span> <span class="o">&lt;-</span> <span class="n">dts</span><span class="o">$</span><span class="n">get_records</span><span class="p">(</span><span class="n">geofilter.distance</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">48.8580602</span><span class="p">,</span> <span class="m">2.3089956</span><span class="p">,</span> <span class="m">1000</span><span class="p">))</span>
+<span class="n">dfFilterDistance</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Source: local data frame [10 x 5]
+## 
+##         type_de_poste_public nombre_d_ordinateurs etablissement  dist
+##                        &lt;chr&gt;                &lt;int&gt;         &lt;chr&gt; &lt;chr&gt;
+## 1                  Catalogue                    2        Amélie     0
+## 2    Poste de passage adulte                    2        Amélie     0
+## 3             Poste jeunesse                    2        Amélie     0
+## 4               Poste adulte                    3        Amélie     0
+## 5  Poste de passage jeunesse                    1        Amélie     0
+## 6    Poste de passage adulte                    1   Saint Simon   817
+## 7               Poste adulte                    3   Saint Simon   817
+## 8             Poste jeunesse                    2   Saint Simon   817
+## 9                  Catalogue                    4   Saint Simon   817
+## 10 Poste de passage jeunesse                    1   Saint Simon   817
+## Variables not shown: geom_x_y &lt;list&gt;.</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">geofilter.polygon</span> <span class="o">=</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">lat</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">48.883086</span><span class="p">,</span> <span class="m">48.979022</span><span class="p">,</span> <span class="m">48.883651</span><span class="p">)</span> <span class="p">,</span> 
+                               <span class="n">lon</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">2.379072</span><span class="p">,</span> <span class="m">2.379930</span><span class="p">,</span> <span class="m">2.386968</span><span class="p">))</span>
+<span class="n">dfFilterPolygon</span> <span class="o">&lt;-</span> <span class="n">dts</span><span class="o">$</span><span class="n">get_records</span><span class="p">(</span><span class="n">geofilter.polygon</span> <span class="o">=</span> <span class="n">geofilter.polygon</span><span class="p">)</span>
+<span class="n">dfFilterPolygon</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Source: local data frame [4 x 4]
+## 
+##      type_de_poste_public nombre_d_ordinateurs etablissement
+##                     &lt;chr&gt;                &lt;int&gt;         &lt;chr&gt;
+## 1 Poste de passage adulte                    1        Crimée
+## 2          Poste jeunesse                    4        Crimée
+## 3               Catalogue                    1        Crimée
+## 4            Poste adulte                    1        Crimée
+## Variables not shown: geom_x_y &lt;list&gt;.</code></pre></figure>
+
+<h2 id="use-in-leaflet">Use in leaflet</h2>
+
+<p>If a dataset has geographical information, it will be either in the <em>geom_x_y</em> or in the <em>geom</em> column of the <em>data</em> field. Here is an example of how to use the <em>geom_x_y</em> field in a <a href="https://github.com/rstudio/leaflet">leaflet</a> map.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">positions</span> <span class="o">&lt;-</span> <span class="n">dfRecords</span><span class="o">$</span><span class="n">geom_x_y</span> <span class="o">%&gt;%</span> 
+  <span class="n">purrr</span><span class="o">::</span><span class="n">transpose</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+  <span class="n">lapply</span><span class="p">(</span><span class="n">unlist</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">as.data.frame</span>
+<span class="n">positions</span><span class="o">$</span><span class="n">etablissement</span> <span class="o">=</span> <span class="n">dfRecords</span><span class="o">$</span><span class="n">etablissement</span>
+
+<span class="n">positions</span> <span class="o">&lt;-</span> <span class="n">positions</span> <span class="o">%&gt;%</span> 
+  <span class="n">distinct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">.keep_all</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">rename</span><span class="p">(</span><span class="n">lng</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">lat</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">&lt;-</span> <span class="n">leaflet</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="s2">"900px"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">addProviderTiles</span><span class="p">(</span><span class="s2">"CartoDB.Positron"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">addMarkers</span><span class="p">(</span><span class="n">clusterOptions</span> <span class="o">=</span> <span class="n">markerClusterOptions</span><span class="p">(),</span> <span class="n">popup</span> <span class="o">=</span> <span class="o">~</span><span class="n">etablissement</span><span class="p">)</span>
+<span class="n">m</span></code></pre></figure>
+
+<!--html_preserve-->
+<div id="htmlwidget-6890" style="width:900px;height:504px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6890">{"x":{"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[48.8320357,48.8580602,48.849937,48.8844441,48.8419904,48.8665015,48.8905832,48.8459745,48.8848913,48.8733839,48.8883086,48.8775273072746,48.8772091,48.8618192,48.8311087,48.8841895,48.8425318,48.8993441,48.8268092,48.8719649,48.8521289,48.859817,48.894909,48.86306045,48.8715798,48.8719634,48.8793551,48.8659605,48.8455293,48.8568598,48.8779745,48.8386225,48.8478671,48.8561772,48.8873166,48.8811111,48.8718064,48.8515962,48.8762706,48.8402996,48.8531576,48.8600425,48.8367728,48.8424926,48.8591443,48.8890032,48.8417004,48.8897366,48.8350219,48.8308705,48.8415767,48.8392527,48.8717915,48.8778252,48.8848773,48.863631],[2.310555,2.3089956,2.2864279,2.3219036,2.3591175,2.3404242,2.3441532,2.3777229,2.3830431,2.3404653,2.3027261,2.31749791213483,2.3708098,2.2847432,2.3442413,2.3541593,2.3974589,2.3361773,2.3663928,2.3626033,2.3452233,2.4032053,2.3637139,2.34573014114648,2.408439,2.3998434,2.3975049,2.3928351,2.3871246,2.3200325,2.3450099,2.3218739,2.3275429,2.3556453,2.3724595,2.3323039,2.3893099,2.3839448,2.3881083,2.278541,2.4010184,2.3412674,2.3036789,2.3496874,2.3794671,2.362957,2.2993589,2.3197217,2.3268861,2.3569681,2.2657172,2.3383332,2.357372,2.3029806,2.3674171,2.3600893],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Aimé Césaire","Amélie","Andrée Chedid","Batignolles","Buffon","Charlotte Delbo","Robert Sabatier","Diderot","Crimée","Drouot","Edmond Rostand","Europe","François Villon","Germaine Tillion","Glacière","Goutte d'or","Hélène Berr","Jacqueline de Romilly","Jean-Pierre Melville","Lancry","L'Heure Joyeuse","Marguerite Duras","Maurice Genevoix","MMP","Mortier","Oscar Wilde","Place des fêtes","Sorbier","Saint Eloi","Saint Simon","Valeyre","Vandamme","André Malraux","Arthur Rimbaud","Benjamin Rabier","Chaptal","Couronnes","Faidherbe","Fessart","Gutenberg","Louise Michel","Louvre","Marguerite Yourcenar","Mohammed Arkoun","Parmentier","Vaclav Havel","Vaugirard","Colette Vivier","Georges Brassens","Italie","Musset","Rainer Maria Rilke","Château d'eau","Courcelles","Hergé","Marguerite Audoux"],{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true},null,null,null]}],"limits":{"lat":[48.8268092,48.8993441],"lng":[2.2657172,2.408439]}},"evals":[],"jsHooks":[]}</script>
+<!--/html_preserve-->
+
+<h2 id="future-work">Future work</h2>
+
+<p>I plan on improving the package in order to access other types of portals. Let me know if you have any suggestions or if you encounter any problems through the package <a href="https://github.com/Tutuchan/fodr">Github page</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        <!-- 
+
+
+  
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#opendata" class="page__taxonomy-item" rel="tag">opendata</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#r" class="page__taxonomy-item" rel="tag">r</a>
+    
+    </span>
+  </p>
+
+ -->
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-05-30T18:49:30+02:00">May 30, 2016</time></p>
+        
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=/r/fodr/" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=/r/fodr/" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=/r/fodr/" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=/r/fodr/" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="/r/premades-lol/" class="pagination--pager" title="A quick look at win rates in premade groups in League of Legends
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      
+
+<div class="page__comments">
+  <h4 class="page__comments-title">Leave a Comment</h4>
+  
+    <section id="disqus_thread"></section>
+  
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      
+        <h4 class="page__related-title">You May Also Enjoy</h4>
+      
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  
+    <a href="/r/premades-lol/">
+  
+    <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      
+      <h2 class="archive__item-title" itemprop="headline">A quick look at win rates in premade groups in League of Legends
+</h2>
+      
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+  18 minutes read
+</p>
+      
+      <p class="archive__item-excerpt" itemprop="description">Let’s start off this blog with a post about League of Legends. For those of you that are not aware of this game, it is one of the most popular games on the p...</p>
+    </article>
+  </a>
+</div>
+        
+      </div>
+    </div>
+  
+</div>
+
+
+<script src="/htmlwidgets_deps/htmlwidgets-0.6/htmlwidgets.js"></script>
+<script src="/htmlwidgets_deps/jquery-1.11.1/jquery.min.js"></script>
+<link href="/htmlwidgets_deps/leaflet-0.7.3/leaflet.css" rel="stylesheet" />
+<script src="/htmlwidgets_deps/leaflet-0.7.3/leaflet.js"></script>
+<link href="/htmlwidgets_deps/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<link href="/htmlwidgets_deps/leaflet-label-0.2.2/leaflet.label.css" rel="stylesheet" />
+<script src="/htmlwidgets_deps/leaflet-label-0.2.2/leaflet.label.js"></script>
+<script src="/htmlwidgets_deps/leaflet-binding-1.0.1.9004/leaflet.js"></script>
+<script src="/htmlwidgets_deps/leaflet-providers-1.0.27/leaflet-providers.js"></script>
+<script src="/htmlwidgets_deps/leaflet-providers-plugin-1.0.1.9004/leaflet-providers-plugin.js"></script>
+<link href="/htmlwidgets_deps/leaflet-markercluster-0.4.0/MarkerCluster.css" rel="stylesheet" />
+<link href="/htmlwidgets_deps/leaflet-markercluster-0.4.0/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="/htmlwidgets_deps/leaflet-markercluster-0.4.0/leaflet.markercluster.js"></script>
+
+
+    <div class="page__footer">
+      <footer>
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/tutuchan"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/tutuchan"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2016 Pierre Formont. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'pierreformont';
+  	var disqus_identifier = "/r/fodr/";
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+    <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+  </body>
+</html>
+

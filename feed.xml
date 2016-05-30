@@ -1,4 +1,416 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.0.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2016-05-21T14:55:46+02:00</updated><id>/</id><title>A gameR perspective</title><subtitle>A blog about R, video games and stuff.</subtitle><author><name>Pierre Formont</name><email>pierre.formont@gmail.com</email></author><entry><title>A quick look at win rates in premade groups in League of Legends</title><link href="/r/premades-lol/" rel="alternate" type="text/html" title="A quick look at win rates in premade groups in League of Legends" /><published>2016-05-21T14:55:44+02:00</published><updated>2016-05-21T14:55:44+02:00</updated><id>/r/premades-lol</id><content type="html" xml:base="/r/premades-lol/">&lt;aside class=&quot;sidebar__right&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.0.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2016-05-30T21:30:59+02:00</updated><id>/</id><title>A gameR perspective</title><subtitle>A blog about R, video games and stuff.</subtitle><author><name>Pierre Formont</name><email>pierre.formont@gmail.com</email></author><entry><title>Introducing fodr: a package for French open data in R</title><link href="/r/fodr/" rel="alternate" type="text/html" title="Introducing fodr: a package for French open data in R" /><published>2016-05-30T18:49:30+02:00</published><updated>2016-05-30T18:49:30+02:00</updated><id>/r/fodr</id><content type="html" xml:base="/r/fodr/">&lt;aside class=&quot;sidebar__right&quot;&gt;
+&lt;nav class=&quot;toc&quot;&gt;
+    &lt;header&gt;&lt;h4 class=&quot;nav__title&quot;&gt;&lt;i class=&quot;fa fa-file-text&quot;&gt;&lt;/i&gt; Table of contents&lt;/h4&gt;&lt;/header&gt;
+&lt;ul class=&quot;toc__menu&quot; id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#the-package&quot; id=&quot;markdown-toc-the-package&quot;&gt;The package&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#getting-the-package&quot; id=&quot;markdown-toc-getting-the-package&quot;&gt;Getting the package&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#available-portals&quot; id=&quot;markdown-toc-available-portals&quot;&gt;Available portals&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#structure&quot; id=&quot;markdown-toc-structure&quot;&gt;Structure&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#portals&quot; id=&quot;markdown-toc-portals&quot;&gt;Portals&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#instantiation&quot; id=&quot;markdown-toc-instantiation&quot;&gt;Instantiation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#fetching-data---the-search-method&quot; id=&quot;markdown-toc-fetching-data---the-search-method&quot;&gt;Fetching data - the search method&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#datasets&quot; id=&quot;markdown-toc-datasets&quot;&gt;Datasets&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#instantiation-1&quot; id=&quot;markdown-toc-instantiation-1&quot;&gt;Instantiation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#fetching-data&quot; id=&quot;markdown-toc-fetching-data&quot;&gt;Fetching data&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#the-getrecords-method&quot; id=&quot;markdown-toc-the-getrecords-method&quot;&gt;The get_records method&lt;/a&gt;            &lt;ul&gt;
+              &lt;li&gt;&lt;a href=&quot;#refine-and-exclude&quot; id=&quot;markdown-toc-refine-and-exclude&quot;&gt;refine and exclude&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#sort&quot; id=&quot;markdown-toc-sort&quot;&gt;sort&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#q&quot; id=&quot;markdown-toc-q&quot;&gt;q&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;#geofilterdistance-and-geofilterpolygon&quot; id=&quot;markdown-toc-geofilterdistance-and-geofilterpolygon&quot;&gt;geofilter.distance and geofilter.polygon&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#use-in-leaflet&quot; id=&quot;markdown-toc-use-in-leaflet&quot;&gt;Use in leaflet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#future-work&quot; id=&quot;markdown-toc-future-work&quot;&gt;Future work&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/nav&gt;
+&lt;/aside&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Open data is the idea that some data should be freely available to everyone to use and republish as they wish, without restrictions from copyright, patents or other mechanisms of control.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://link.springer.com/chapter/10.1007%2F978-3-540-76298-0_52&quot;&gt;Source&lt;/a&gt; from &lt;a href=&quot;https://en.wikipedia.org/wiki/Open_data&quot;&gt;Wikipedia&lt;/a&gt;. Post image from &lt;a href=&quot;http://www.rudebaguette.com/&quot;&gt;Rude Baguette&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Nowadays, more and more government organisations subscribe to the open data movement and some have done so in France, in the hope that new services or insights would come from the analysis of this data. To name a few :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.data.gouv.fr/en/&quot;&gt;the French government&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;the city of &lt;a href=&quot;http://opendata.paris.fr/&quot;&gt;Paris&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://data.erdf.fr/page/accueil/&quot;&gt;ERDF&lt;/a&gt;, the French electricity distribution company,&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://data.sncf.com/&quot;&gt;SNCF&lt;/a&gt;, the French railroad company&lt;/li&gt;
+  &lt;li&gt;etc&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.opendatasoft.com/a-comprehensive-list-of-all-open-data-portals-around-the-world/&quot;&gt;Recently&lt;/a&gt;, due to the ever-increasing number of open data portals, the &lt;a href=&quot;http://opendatainception.io/&quot;&gt;Open Data Inception&lt;/a&gt; portal was created by the &lt;a href=&quot;https://www.opendatasoft.com/&quot;&gt;OpenDataSoft&lt;/a&gt; company. The aim of this portal is to provide a comprehensive list of open data portals around the world.&lt;/p&gt;
+
+&lt;p&gt;As it happens, many of the French open data portals are available through the OpenDataSoft &lt;a href=&quot;https://www.opendatasoft.com/open-data-solutions/&quot;&gt;Open Data platform&lt;/a&gt; and thus share a common API.&lt;/p&gt;
+
+&lt;p&gt;Some of the datasets on these portals have caught my eyes recently and I downloaded a few of them to tinker with them on my spare time but I quickly realised that, even though the API is well designed, the process is a bit cumbersome if you want to use any data in R as you have to go on a specific portal, find the dataset you’re looking for, download it to some place on your disk and then go back to R and import it.&lt;/p&gt;
+
+&lt;p&gt;I thought by someone would have created a package to simplify this but I was mistaken. Thus, &lt;code class=&quot;highlighter-rouge&quot;&gt;fodr&lt;/code&gt; was born.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-package&quot;&gt;The package&lt;/h2&gt;
+
+&lt;h3 id=&quot;getting-the-package&quot;&gt;Getting the package&lt;/h3&gt;
+
+&lt;p&gt;The package is hosted on &lt;a href=&quot;https://github.com/Tutuchan/fodr&quot;&gt;Github&lt;/a&gt; and can be installed &lt;em&gt;via&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;devtools&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;devtools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;install_github&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;tutuchan/fodr&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;available-portals&quot;&gt;Available portals&lt;/h3&gt;
+
+&lt;p&gt;The list of currently available portals can be accessed with the &lt;code class=&quot;highlighter-rouge&quot;&gt;list_portals()&lt;/code&gt; function:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fodr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;leaflet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;list_portals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;portals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base_urls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Source: local data frame [13 x 2]
+## 
+##        portals                                     base_urls
+##          &amp;lt;chr&amp;gt;                                         &amp;lt;chr&amp;gt;
+## 1         ratp                           http://data.ratp.fr
+## 2  iledefrance                    http://data.iledefrance.fr
+## 3   infogreffe                      http://datainfogreffe.fr
+## 4     toulouse            https://data.toulouse-metropole.fr
+## 5         star                  https://data.explore.star.fr
+## 6         issy                          http://data.issy.com
+## 7         stif                     http://opendata.stif.info
+## 8        paris                      http://opendata.paris.fr
+## 9           04            http://tourisme04.opendatasoft.com
+## 10          62            http://tourisme62.opendatasoft.com
+## 11          92            https://opendata.hauts-de-seine.fr
+## 12       enesr http://data.enseignementsup-recherche.gouv.fr
+## 13        erdf                          https://data.erdf.fr&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;At the time of writing only 13 portals are available through &lt;code class=&quot;highlighter-rouge&quot;&gt;fodr&lt;/code&gt; for several reasons :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fodr&lt;/code&gt; only handles the OpenDataSoft API and many of the French open data portals use the &lt;a href=&quot;http://www.esri.com/software/arcgis/arcgisonline/arcgis-open-data&quot;&gt;ArcGIS Open platform&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;some do not have an API, like the &lt;a href=&quot;http://data.gouv.fr/&quot;&gt;Data.gouv&lt;/a&gt; or the &lt;a href=&quot;http://data.grandlyon.com/&quot;&gt;Grand Lyon&lt;/a&gt; website,&lt;/li&gt;
+  &lt;li&gt;some use the &lt;a href=&quot;http://www.navitia.io/&quot;&gt;navitia.io&lt;/a&gt; API, like the &lt;a href=&quot;https://data.sncf.com/&quot;&gt;SNCF&lt;/a&gt; website,&lt;/li&gt;
+  &lt;li&gt;some simply do not have data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To obtain this list, I looked at the Open Data Inception dataset and tried to access a method on the API to see if it returned any results and curated the remaining datasets but I’m pretty sure there is a better way to do it:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jsonlite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;curl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;number_of_datasets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;fromJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://public.opendatasoft.com/api/records/1.0/search/?dataset=open-data-sources&amp;amp;facet=country&amp;amp;refine.country=France&amp;amp;nrows=1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nhits&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;listDatasets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;fromJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paste0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://public.opendatasoft.com/api/records/1.0/search/?dataset=open-data-sources&amp;amp;facet=country&amp;amp;refine.country=France&amp;amp;rows=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number_of_datasets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number_of_datasets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Arcgis&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listDatasets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;records&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fields&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listDatasets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;records&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fields&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;fetch_data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;purrr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;safely&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;nhits&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fromJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paste0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/api/datasets/1.0/search/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is.null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fetch_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listDatasets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;records&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fields&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NULL&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bind_rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;structure&quot;&gt;Structure&lt;/h3&gt;
+
+&lt;p&gt;I created two classes using the &lt;a href=&quot;https://github.com/wch/R6&quot;&gt;R6&lt;/a&gt;: &lt;strong&gt;FODRPortal&lt;/strong&gt; and &lt;strong&gt;FODRDataset&lt;/strong&gt;. I also created two wrappers around these classes to skip the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;class&amp;gt;$new(...)&lt;/code&gt; syntax that I’m not a fan of:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Instantiate a FODRPortal
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fodr_portal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;portal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Instantiate a FODRDataset
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fodr_dataset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;portal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;portals&quot;&gt;Portals&lt;/h2&gt;
+
+&lt;h3 id=&quot;instantiation&quot;&gt;Instantiation&lt;/h3&gt;
+
+&lt;p&gt;Access to a portal is granted through the &lt;code class=&quot;highlighter-rouge&quot;&gt;fodr_portal&lt;/code&gt; function:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;portal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fodr_portal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;paris&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;portal&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## FODRPortal object
+## --------------------------------------------------------------------
+## Portal: paris 
+## Number of datasets: 175 
+## Themes:
+##   - Administration
+##   - Citoyens
+##   - Commerces
+##   - Culture
+##   - Déplacements
+##   - Environnement
+##   - Finances
+##   - Services
+##   - Urbanisme 
+## --------------------------------------------------------------------&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;print&lt;/code&gt; method has been overloaded to show useful information about the portal. Here, it shows that this portal has 175 datasets divided among several themes.&lt;/p&gt;
+
+&lt;h3 id=&quot;fetching-data---the-search-method&quot;&gt;Fetching data - the search method&lt;/h3&gt;
+
+&lt;p&gt;For a &lt;code class=&quot;highlighter-rouge&quot;&gt;FODRPortal&lt;/code&gt;, there is only one method: &lt;code class=&quot;highlighter-rouge&quot;&gt;search&lt;/code&gt;. It leverages the &lt;strong&gt;OpenDataSoft&lt;/strong&gt; &lt;a href=&quot;&quot;&gt;catalog API&lt;/a&gt; in order to find relevant datasets. By default, calling the &lt;code class=&quot;highlighter-rouge&quot;&gt;search&lt;/code&gt; method will retrieve &lt;strong&gt;all&lt;/strong&gt; elements that satisfy the query, contrary to the &lt;strong&gt;OpenDataSoft&lt;/strong&gt; API that only retrieves 10.&lt;/p&gt;
+
+&lt;p&gt;There are several arguments to this function that are detailed in the &lt;strong&gt;OpenDataSoft&lt;/strong&gt; documentation. I also added another argument, &lt;em&gt;theme&lt;/em&gt;, that allows to return all datasets that fall under a specific theme.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;list_datasets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;portal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theme&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Culture&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## 24 datasets found ...&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Datasets obtained by this method are directly returned as a list but also stored in the &lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt; field of the &lt;code class=&quot;highlighter-rouge&quot;&gt;portal&lt;/code&gt; object:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;list_datasets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## FODRDataset object
+## --------------------------------------------------------------------
+## Dataset id: postes-publics-des-bibliotheques-de-pret 
+## Theme: Culture 
+## Keywords: postes publics, ordinateurs, catalogues en ligne, bibliothèques, prêt 
+## Publisher: Service Informatique des Bibliothèques 
+## --------------------------------------------------------------------
+## Number of records: 230 
+## Number of files: 0 
+## Modified: 2014-07-30 
+## Facets: etablissement, type_de_poste_public 
+## Sortables: nombre_d_ordinateurs 
+## --------------------------------------------------------------------&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;datasets&quot;&gt;Datasets&lt;/h2&gt;
+
+&lt;h3 id=&quot;instantiation-1&quot;&gt;Instantiation&lt;/h3&gt;
+
+&lt;p&gt;As shown just before, datasets can be retrieved either from a call to &lt;code class=&quot;highlighter-rouge&quot;&gt;portal$search&lt;/code&gt; or, if you know the portal and id, by a call to &lt;code class=&quot;highlighter-rouge&quot;&gt;fodr_dataset&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# dts &amp;lt;- fodr_dataset(portal = &quot;paris&quot;, id = list_datasets[[1]]$id)
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fodr_dataset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;portal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;paris&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;postes-publics-des-bibliotheques-de-pret&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## FODRDataset object
+## --------------------------------------------------------------------
+## Dataset id: postes-publics-des-bibliotheques-de-pret 
+## Theme: Culture 
+## Keywords: postes publics, ordinateurs, catalogues en ligne, bibliothèques, prêt 
+## Publisher: Service Informatique des Bibliothèques 
+## --------------------------------------------------------------------
+## Number of records: 230 
+## Number of files: 0 
+## Modified: 2014-07-30 
+## Facets: etablissement, type_de_poste_public 
+## Sortables: nombre_d_ordinateurs 
+## --------------------------------------------------------------------&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then again, the &lt;code class=&quot;highlighter-rouge&quot;&gt;print&lt;/code&gt; method has been overloaded to show useful information about the dataset:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;number of records,&lt;/li&gt;
+  &lt;li&gt;number of files,&lt;/li&gt;
+  &lt;li&gt;keywords,&lt;/li&gt;
+  &lt;li&gt;facets: columns you can filter on,&lt;/li&gt;
+  &lt;li&gt;sortables: columns you can sort on&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;fetching-data&quot;&gt;Fetching data&lt;/h3&gt;
+
+&lt;p&gt;There are two methods to fetch data from a dataset: &lt;code class=&quot;highlighter-rouge&quot;&gt;get_records&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;get_attachments&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;the-getrecords-method&quot;&gt;The get_records method&lt;/h4&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;get_records&lt;/code&gt; method the &lt;a href=&quot;https://docs.opendatasoft.com/en/api/records_api.html#records-download-api&quot;&gt;Records download API&lt;/a&gt; and again fetches all available records instead of the first 10.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;dfRecords&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;dfRecords&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Source: local data frame [230 x 4]
+## 
+##       type_de_poste_public nombre_d_ordinateurs   etablissement
+##                      &amp;lt;chr&amp;gt;                &amp;lt;int&amp;gt;           &amp;lt;chr&amp;gt;
+## 1                Catalogue                    3    Aimé Césaire
+## 2                Catalogue                    2          Amélie
+## 3  Poste de passage adulte                    2          Amélie
+## 4           Poste jeunesse                    2          Amélie
+## 5           Poste jeunesse                    3   Andrée Chedid
+## 6             Poste adulte                    3     Batignolles
+## 7  Poste de passage adulte                    3          Buffon
+## 8                Catalogue                    2 Charlotte Delbo
+## 9                Catalogue                    8 Robert Sabatier
+## 10            Poste adulte                    8 Robert Sabatier
+## ..                     ...                  ...             ...
+## Variables not shown: geom_x_y &amp;lt;list&amp;gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h5 id=&quot;refine-and-exclude&quot;&gt;refine and exclude&lt;/h5&gt;
+
+&lt;p&gt;The &lt;em&gt;refine&lt;/em&gt; and &lt;em&gt;exclude&lt;/em&gt; arguments are used to filter results on facets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;refine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etablissement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Amélie&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Source: local data frame [5 x 4]
+## 
+##        type_de_poste_public nombre_d_ordinateurs etablissement
+##                       &amp;lt;chr&amp;gt;                &amp;lt;int&amp;gt;         &amp;lt;chr&amp;gt;
+## 1                 Catalogue                    2        Amélie
+## 2   Poste de passage adulte                    2        Amélie
+## 3            Poste jeunesse                    2        Amélie
+## 4              Poste adulte                    3        Amélie
+## 5 Poste de passage jeunesse                    1        Amélie
+## Variables not shown: geom_x_y &amp;lt;list&amp;gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exclude&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etablissement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Amélie&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Source: local data frame [225 x 4]
+## 
+##       type_de_poste_public nombre_d_ordinateurs   etablissement
+##                      &amp;lt;chr&amp;gt;                &amp;lt;int&amp;gt;           &amp;lt;chr&amp;gt;
+## 1                Catalogue                    3    Aimé Césaire
+## 2           Poste jeunesse                    3   Andrée Chedid
+## 3             Poste adulte                    3     Batignolles
+## 4  Poste de passage adulte                    3          Buffon
+## 5                Catalogue                    2 Charlotte Delbo
+## 6                Catalogue                    8 Robert Sabatier
+## 7             Poste adulte                    8 Robert Sabatier
+## 8           Poste jeunesse                    2         Diderot
+## 9  Poste de passage adulte                    1          Crimée
+## 10               Catalogue                    1          Drouot
+## ..                     ...                  ...             ...
+## Variables not shown: geom_x_y &amp;lt;list&amp;gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h5 id=&quot;sort&quot;&gt;sort&lt;/h5&gt;
+
+&lt;p&gt;The &lt;em&gt;sort&lt;/em&gt; argument is used to sort results on sortables:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;nombre_d_ordinateurs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Source: local data frame [230 x 4]
+## 
+##    type_de_poste_public nombre_d_ordinateurs         etablissement
+##                   &amp;lt;chr&amp;gt;                &amp;lt;int&amp;gt;                 &amp;lt;chr&amp;gt;
+## 1          Poste adulte                   36      Marguerite Duras
+## 2          Poste adulte                   14  Marguerite Yourcenar
+## 3             Catalogue                   13  Marguerite Yourcenar
+## 4          Poste adulte                   13         André Malraux
+## 5          Poste adulte                   12 Jacqueline de Romilly
+## 6          Poste adulte                   12          Vaclav Havel
+## 7          Poste adulte                   12           Hélène Berr
+## 8          Poste adulte                   12        Edmond Rostand
+## 9          Poste adulte                   11         Andrée Chedid
+## 10         Poste adulte                   11                Buffon
+## ..                  ...                  ...                   ...
+## Variables not shown: geom_x_y &amp;lt;list&amp;gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;-nombre_d_ordinateurs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Source: local data frame [230 x 4]
+## 
+##         type_de_poste_public nombre_d_ordinateurs    etablissement
+##                        &amp;lt;chr&amp;gt;                &amp;lt;int&amp;gt;            &amp;lt;chr&amp;gt;
+## 1    Poste de passage adulte                    1           Crimée
+## 2                  Catalogue                    1           Drouot
+## 3                  Catalogue                    1           Europe
+## 4  Poste de passage jeunesse                    1      Hélène Berr
+## 5             Poste jeunesse                    1           Lancry
+## 6    Poste de passage adulte                    1  L&#39;Heure Joyeuse
+## 7                  Catalogue                    1 Maurice Genevoix
+## 8    Poste de passage adulte                    1 Maurice Genevoix
+## 9    Poste de passage adulte                    1              MMP
+## 10                 Catalogue                    1          Mortier
+## ..                       ...                  ...              ...
+## Variables not shown: geom_x_y &amp;lt;list&amp;gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h5 id=&quot;q&quot;&gt;q&lt;/h5&gt;
+
+&lt;p&gt;The &lt;em&gt;q&lt;/em&gt; argument is used to perform full-text search:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;q&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;GENEVOIX&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Source: local data frame [4 x 4]
+## 
+##      type_de_poste_public nombre_d_ordinateurs    etablissement
+##                     &amp;lt;chr&amp;gt;                &amp;lt;int&amp;gt;            &amp;lt;chr&amp;gt;
+## 1            Poste adulte                    1 Maurice Genevoix
+## 2          Poste jeunesse                    3 Maurice Genevoix
+## 3               Catalogue                    1 Maurice Genevoix
+## 4 Poste de passage adulte                    1 Maurice Genevoix
+## Variables not shown: geom_x_y &amp;lt;list&amp;gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h5 id=&quot;geofilterdistance-and-geofilterpolygon&quot;&gt;geofilter.distance and geofilter.polygon&lt;/h5&gt;
+
+&lt;p&gt;These are used to filter results based on their location:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;geofilter.distance&lt;/em&gt; takes a numeric vector of three elemnts: longitude and latitude of the center of a circle and radius of the circle (in meters)&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;geofilter.polygon&lt;/em&gt; takes a data.frame of two columns named &lt;em&gt;lat&lt;/em&gt; and &lt;em&gt;lon&lt;/em&gt; which bounds the area where results are allowed to be&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;dfFilterDistance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geofilter.distance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;48.8580602&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2.3089956&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;dfFilterDistance&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Source: local data frame [10 x 5]
+## 
+##         type_de_poste_public nombre_d_ordinateurs etablissement  dist
+##                        &amp;lt;chr&amp;gt;                &amp;lt;int&amp;gt;         &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;
+## 1                  Catalogue                    2        Amélie     0
+## 2    Poste de passage adulte                    2        Amélie     0
+## 3             Poste jeunesse                    2        Amélie     0
+## 4               Poste adulte                    3        Amélie     0
+## 5  Poste de passage jeunesse                    1        Amélie     0
+## 6    Poste de passage adulte                    1   Saint Simon   817
+## 7               Poste adulte                    3   Saint Simon   817
+## 8             Poste jeunesse                    2   Saint Simon   817
+## 9                  Catalogue                    4   Saint Simon   817
+## 10 Poste de passage jeunesse                    1   Saint Simon   817
+## Variables not shown: geom_x_y &amp;lt;list&amp;gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;geofilter.polygon&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data.frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;48.883086&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;48.979022&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;48.883651&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+                               &lt;span class=&quot;n&quot;&gt;lon&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2.379072&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2.379930&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2.386968&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;dfFilterPolygon&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_records&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geofilter.polygon&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;geofilter.polygon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;dfFilterPolygon&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Source: local data frame [4 x 4]
+## 
+##      type_de_poste_public nombre_d_ordinateurs etablissement
+##                     &amp;lt;chr&amp;gt;                &amp;lt;int&amp;gt;         &amp;lt;chr&amp;gt;
+## 1 Poste de passage adulte                    1        Crimée
+## 2          Poste jeunesse                    4        Crimée
+## 3               Catalogue                    1        Crimée
+## 4            Poste adulte                    1        Crimée
+## Variables not shown: geom_x_y &amp;lt;list&amp;gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;use-in-leaflet&quot;&gt;Use in leaflet&lt;/h2&gt;
+
+&lt;p&gt;If a dataset has geographical information, it will be either in the &lt;em&gt;geom_x_y&lt;/em&gt; or in the &lt;em&gt;geom&lt;/em&gt; column of the &lt;em&gt;data&lt;/em&gt; field. Here is an example of how to use the &lt;em&gt;geom_x_y&lt;/em&gt; field in a &lt;a href=&quot;https://github.com/rstudio/leaflet&quot;&gt;leaflet&lt;/a&gt; map.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;positions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dfRecords&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_x_y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;purrr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transpose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;lapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unlist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;as.data.frame&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;positions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etablissement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dfRecords&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etablissement&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;positions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;positions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;distinct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;.keep_all&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;rename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lng&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;leaflet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;positions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;900px&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;addProviderTiles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;CartoDB.Positron&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;addMarkers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clusterOptions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;markerClusterOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;popup&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;etablissement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;!--html_preserve--&gt;
+&lt;div id=&quot;htmlwidget-6890&quot; style=&quot;width:900px;height:504px;&quot; class=&quot;leaflet html-widget&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-6890&quot;&gt;{&quot;x&quot;:{&quot;calls&quot;:[{&quot;method&quot;:&quot;addProviderTiles&quot;,&quot;args&quot;:[&quot;CartoDB.Positron&quot;,null,null,{&quot;errorTileUrl&quot;:&quot;&quot;,&quot;noWrap&quot;:false,&quot;zIndex&quot;:null,&quot;unloadInvisibleTiles&quot;:null,&quot;updateWhenIdle&quot;:null,&quot;detectRetina&quot;:false,&quot;reuseTiles&quot;:false}]},{&quot;method&quot;:&quot;addMarkers&quot;,&quot;args&quot;:[[48.8320357,48.8580602,48.849937,48.8844441,48.8419904,48.8665015,48.8905832,48.8459745,48.8848913,48.8733839,48.8883086,48.8775273072746,48.8772091,48.8618192,48.8311087,48.8841895,48.8425318,48.8993441,48.8268092,48.8719649,48.8521289,48.859817,48.894909,48.86306045,48.8715798,48.8719634,48.8793551,48.8659605,48.8455293,48.8568598,48.8779745,48.8386225,48.8478671,48.8561772,48.8873166,48.8811111,48.8718064,48.8515962,48.8762706,48.8402996,48.8531576,48.8600425,48.8367728,48.8424926,48.8591443,48.8890032,48.8417004,48.8897366,48.8350219,48.8308705,48.8415767,48.8392527,48.8717915,48.8778252,48.8848773,48.863631],[2.310555,2.3089956,2.2864279,2.3219036,2.3591175,2.3404242,2.3441532,2.3777229,2.3830431,2.3404653,2.3027261,2.31749791213483,2.3708098,2.2847432,2.3442413,2.3541593,2.3974589,2.3361773,2.3663928,2.3626033,2.3452233,2.4032053,2.3637139,2.34573014114648,2.408439,2.3998434,2.3975049,2.3928351,2.3871246,2.3200325,2.3450099,2.3218739,2.3275429,2.3556453,2.3724595,2.3323039,2.3893099,2.3839448,2.3881083,2.278541,2.4010184,2.3412674,2.3036789,2.3496874,2.3794671,2.362957,2.2993589,2.3197217,2.3268861,2.3569681,2.2657172,2.3383332,2.357372,2.3029806,2.3674171,2.3600893],null,null,null,{&quot;clickable&quot;:true,&quot;draggable&quot;:false,&quot;keyboard&quot;:true,&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;zIndexOffset&quot;:0,&quot;opacity&quot;:1,&quot;riseOnHover&quot;:false,&quot;riseOffset&quot;:250},[&quot;Aimé Césaire&quot;,&quot;Amélie&quot;,&quot;Andrée Chedid&quot;,&quot;Batignolles&quot;,&quot;Buffon&quot;,&quot;Charlotte Delbo&quot;,&quot;Robert Sabatier&quot;,&quot;Diderot&quot;,&quot;Crimée&quot;,&quot;Drouot&quot;,&quot;Edmond Rostand&quot;,&quot;Europe&quot;,&quot;François Villon&quot;,&quot;Germaine Tillion&quot;,&quot;Glacière&quot;,&quot;Goutte d&#39;or&quot;,&quot;Hélène Berr&quot;,&quot;Jacqueline de Romilly&quot;,&quot;Jean-Pierre Melville&quot;,&quot;Lancry&quot;,&quot;L&#39;Heure Joyeuse&quot;,&quot;Marguerite Duras&quot;,&quot;Maurice Genevoix&quot;,&quot;MMP&quot;,&quot;Mortier&quot;,&quot;Oscar Wilde&quot;,&quot;Place des fêtes&quot;,&quot;Sorbier&quot;,&quot;Saint Eloi&quot;,&quot;Saint Simon&quot;,&quot;Valeyre&quot;,&quot;Vandamme&quot;,&quot;André Malraux&quot;,&quot;Arthur Rimbaud&quot;,&quot;Benjamin Rabier&quot;,&quot;Chaptal&quot;,&quot;Couronnes&quot;,&quot;Faidherbe&quot;,&quot;Fessart&quot;,&quot;Gutenberg&quot;,&quot;Louise Michel&quot;,&quot;Louvre&quot;,&quot;Marguerite Yourcenar&quot;,&quot;Mohammed Arkoun&quot;,&quot;Parmentier&quot;,&quot;Vaclav Havel&quot;,&quot;Vaugirard&quot;,&quot;Colette Vivier&quot;,&quot;Georges Brassens&quot;,&quot;Italie&quot;,&quot;Musset&quot;,&quot;Rainer Maria Rilke&quot;,&quot;Château d&#39;eau&quot;,&quot;Courcelles&quot;,&quot;Hergé&quot;,&quot;Marguerite Audoux&quot;],{&quot;showCoverageOnHover&quot;:true,&quot;zoomToBoundsOnClick&quot;:true,&quot;spiderfyOnMaxZoom&quot;:true,&quot;removeOutsideVisibleBounds&quot;:true},null,null,null]}],&quot;limits&quot;:{&quot;lat&quot;:[48.8268092,48.8993441],&quot;lng&quot;:[2.2657172,2.408439]}},&quot;evals&quot;:[],&quot;jsHooks&quot;:[]}&lt;/script&gt;
+&lt;!--/html_preserve--&gt;
+
+&lt;h2 id=&quot;future-work&quot;&gt;Future work&lt;/h2&gt;
+
+&lt;p&gt;I plan on improving the package in order to access other types of portals. Let me know if you have any suggestions or if you encounter any problems through the package &lt;a href=&quot;https://github.com/Tutuchan/fodr&quot;&gt;Github page&lt;/a&gt;.&lt;/p&gt;</content><author><name>Pierre Formont</name><email>pierre.formont@gmail.com</email></author><category term="opendata" /><summary>Nowadays, more and more government organisations subscribe to the open data movement and some have done so in France, in the hopes that new services or insights would come from the analysis of this data.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="../images/r/2016-05-30-fodr/post_img.jpg" /></entry><entry><title>A quick look at win rates in premade groups in League of Legends</title><link href="/r/premades-lol/" rel="alternate" type="text/html" title="A quick look at win rates in premade groups in League of Legends" /><published>2016-05-21T15:08:10+02:00</published><updated>2016-05-21T15:08:10+02:00</updated><id>/r/premades-lol</id><content type="html" xml:base="/r/premades-lol/">&lt;aside class=&quot;sidebar__right&quot;&gt;
 &lt;nav class=&quot;toc&quot;&gt;
     &lt;header&gt;&lt;h4 class=&quot;nav__title&quot;&gt;&lt;i class=&quot;fa fa-file-text&quot;&gt;&lt;/i&gt; Table of contents&lt;/h4&gt;&lt;/header&gt;
 &lt;ul class=&quot;toc__menu&quot; id=&quot;markdown-toc&quot;&gt;
@@ -264,10 +676,10 @@
   return res;}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;!--html_preserve--&gt;
-&lt;div id=&quot;htmlwidget-6603-container&quot; class=&quot;htmlwidget_container&quot;&gt;
-&lt;canvas id=&quot;htmlwidget-6603&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
+&lt;div id=&quot;htmlwidget-9518-container&quot; class=&quot;htmlwidget_container&quot;&gt;
+&lt;canvas id=&quot;htmlwidget-9518&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
 &lt;/div&gt;
-&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-6603&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:true},&quot;tooltips&quot;:{&quot;callbacks&quot;:{&quot;label&quot;:&quot;function(tooltipItem, data) {\n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || &#39;&#39;;\n  var res = datasetLabel + &#39;: &#39; + tooltipItem.yLabel;\n  if (datasetLabel == &#39;proportion&#39;)  res = res + &#39;%&#39;\n  return res;}&quot;}}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Zedlol&quot;,&quot;Teramur&quot;,&quot;Blazing Flamberg&quot;,&quot;TehJester&quot;,&quot;HappyFTN&quot;,&quot;Luciha&quot;,&quot;Flarus&quot;,&quot;Dingouze&quot;,&quot;Legolino&quot;,&quot;MOAR LUCK PLS&quot;,&quot;83Petrus&quot;,&quot;Idstein&quot;,&quot;Im Nasos&quot;,&quot;LoCK Nightmare&quot;,&quot;WRT Daddy&quot;],&quot;datasets&quot;:[{&quot;data&quot;:[38.24,31.37,27.45,20.59,11.76,8.82,4.9,2.94,2.94,2.94,1.96,1.96,1.96,1.96,1.96],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;label&quot;:&quot;proportion&quot;,&quot;type&quot;:&quot;bar&quot;},{&quot;data&quot;:[39,32,28,21,12,9,5,3,3,3,2,2,2,2,2],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#B2DF8A&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#33A02C&quot;,&quot;label&quot;:&quot;number of games&quot;,&quot;type&quot;:&quot;bar&quot;,&quot;yAxisID&quot;:&quot;y-axis-1&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false},{&quot;type&quot;:&quot;linear&quot;,&quot;position&quot;:&quot;right&quot;}]}},&quot;evals&quot;:[&quot;options.tooltips.callbacks.label&quot;],&quot;jsHooks&quot;:[]}&lt;/script&gt;
+&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-9518&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:true},&quot;tooltips&quot;:{&quot;callbacks&quot;:{&quot;label&quot;:&quot;function(tooltipItem, data) {\n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || &#39;&#39;;\n  var res = datasetLabel + &#39;: &#39; + tooltipItem.yLabel;\n  if (datasetLabel == &#39;proportion&#39;)  res = res + &#39;%&#39;\n  return res;}&quot;}}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Zedlol&quot;,&quot;Teramur&quot;,&quot;Blazing Flamberg&quot;,&quot;TehJester&quot;,&quot;HappyFTN&quot;,&quot;Luciha&quot;,&quot;Flarus&quot;,&quot;Dingouze&quot;,&quot;Legolino&quot;,&quot;MOAR LUCK PLS&quot;,&quot;83Petrus&quot;,&quot;Idstein&quot;,&quot;Im Nasos&quot;,&quot;LoCK Nightmare&quot;,&quot;WRT Daddy&quot;],&quot;datasets&quot;:[{&quot;data&quot;:[38.24,31.37,27.45,20.59,11.76,8.82,4.9,2.94,2.94,2.94,1.96,1.96,1.96,1.96,1.96],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;label&quot;:&quot;proportion&quot;,&quot;type&quot;:&quot;bar&quot;},{&quot;data&quot;:[39,32,28,21,12,9,5,3,3,3,2,2,2,2,2],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#B2DF8A&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#33A02C&quot;,&quot;label&quot;:&quot;number of games&quot;,&quot;type&quot;:&quot;bar&quot;,&quot;yAxisID&quot;:&quot;y-axis-1&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false},{&quot;type&quot;:&quot;linear&quot;,&quot;position&quot;:&quot;right&quot;}]}},&quot;evals&quot;:[&quot;options.tooltips.callbacks.label&quot;],&quot;jsHooks&quot;:[]}&lt;/script&gt;
 &lt;!--/html_preserve--&gt;
 
 &lt;p&gt;I actually know most of these people and they &lt;em&gt;ARE&lt;/em&gt; people I have played with in dynamic queue so it seems to be working pretty well. Some of them are people I got matched with several times without actually queuing with them so let’s filter this a bit more by only selecting people I have played more than &lt;strong&gt;twice&lt;/strong&gt;.&lt;/p&gt;
@@ -296,10 +708,10 @@
   return res;}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;!--html_preserve--&gt;
-&lt;div id=&quot;htmlwidget-8682-container&quot; class=&quot;htmlwidget_container&quot;&gt;
-&lt;canvas id=&quot;htmlwidget-8682&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
+&lt;div id=&quot;htmlwidget-6633-container&quot; class=&quot;htmlwidget_container&quot;&gt;
+&lt;canvas id=&quot;htmlwidget-6633&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
 &lt;/div&gt;
-&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-8682&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:true},&quot;tooltips&quot;:{&quot;callbacks&quot;:{&quot;label&quot;:&quot;function(tooltipItem, data) {\n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || &#39;&#39;;\n  var res = datasetLabel + &#39;: &#39; + tooltipItem.yLabel;\n  if (datasetLabel == &#39;proportion&#39;)  res = res + &#39;%&#39;\n  return res;}&quot;}}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Zedlol&quot;,&quot;Teramur&quot;,&quot;Blazing Flamberg&quot;,&quot;TehJester&quot;,&quot;HappyFTN&quot;,&quot;Luciha&quot;,&quot;Flarus&quot;,&quot;Dingouze&quot;,&quot;Legolino&quot;,&quot;MOAR LUCK PLS&quot;],&quot;datasets&quot;:[{&quot;data&quot;:[38.24,31.37,27.45,20.59,11.76,8.82,4.9,2.94,2.94,2.94],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;label&quot;:&quot;proportion&quot;,&quot;type&quot;:&quot;bar&quot;},{&quot;data&quot;:[39,32,28,21,12,9,5,3,3,3],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#B2DF8A&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#33A02C&quot;,&quot;label&quot;:&quot;number of games&quot;,&quot;type&quot;:&quot;bar&quot;,&quot;yAxisID&quot;:&quot;y-axis-1&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false},{&quot;type&quot;:&quot;linear&quot;,&quot;position&quot;:&quot;right&quot;}]}},&quot;evals&quot;:[&quot;options.tooltips.callbacks.label&quot;],&quot;jsHooks&quot;:[]}&lt;/script&gt;
+&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-6633&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:true},&quot;tooltips&quot;:{&quot;callbacks&quot;:{&quot;label&quot;:&quot;function(tooltipItem, data) {\n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || &#39;&#39;;\n  var res = datasetLabel + &#39;: &#39; + tooltipItem.yLabel;\n  if (datasetLabel == &#39;proportion&#39;)  res = res + &#39;%&#39;\n  return res;}&quot;}}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Zedlol&quot;,&quot;Teramur&quot;,&quot;Blazing Flamberg&quot;,&quot;TehJester&quot;,&quot;HappyFTN&quot;,&quot;Luciha&quot;,&quot;Flarus&quot;,&quot;Dingouze&quot;,&quot;Legolino&quot;,&quot;MOAR LUCK PLS&quot;],&quot;datasets&quot;:[{&quot;data&quot;:[38.24,31.37,27.45,20.59,11.76,8.82,4.9,2.94,2.94,2.94],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;label&quot;:&quot;proportion&quot;,&quot;type&quot;:&quot;bar&quot;},{&quot;data&quot;:[39,32,28,21,12,9,5,3,3,3],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#B2DF8A&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#33A02C&quot;,&quot;label&quot;:&quot;number of games&quot;,&quot;type&quot;:&quot;bar&quot;,&quot;yAxisID&quot;:&quot;y-axis-1&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false},{&quot;type&quot;:&quot;linear&quot;,&quot;position&quot;:&quot;right&quot;}]}},&quot;evals&quot;:[&quot;options.tooltips.callbacks.label&quot;],&quot;jsHooks&quot;:[]}&lt;/script&gt;
 &lt;!--/html_preserve--&gt;
 
 &lt;h4 id=&quot;distribution-of-the-number-of-premades&quot;&gt;Distribution of the number of premades&lt;/h4&gt;
@@ -329,10 +741,10 @@
   &lt;span class=&quot;n&quot;&gt;cjsTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;percentage of games played by group size&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;!--html_preserve--&gt;
-&lt;div id=&quot;htmlwidget-6237-container&quot; class=&quot;htmlwidget_container&quot;&gt;
-&lt;canvas id=&quot;htmlwidget-6237&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
+&lt;div id=&quot;htmlwidget-3260-container&quot; class=&quot;htmlwidget_container&quot;&gt;
+&lt;canvas id=&quot;htmlwidget-3260&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
 &lt;/div&gt;
-&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-6237&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;tooltips&quot;:{&quot;callbacks&quot;:{&quot;label&quot;:&quot;function(tooltipItem, data) { \n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || &#39;&#39;;\n  return tooltipItem.yLabel + &#39;%&#39;;}&quot;}},&quot;title&quot;:{&quot;display&quot;:true,&quot;text&quot;:&quot;percentage of games played by group size&quot;}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[1,2,3,4,5],&quot;datasets&quot;:[{&quot;data&quot;:[39.22,9.8,21.57,18.63,10.78],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;type&quot;:&quot;bar&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:true},&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false}]}},&quot;evals&quot;:[&quot;options.tooltips.callbacks.label&quot;],&quot;jsHooks&quot;:[]}&lt;/script&gt;
+&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-3260&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;tooltips&quot;:{&quot;callbacks&quot;:{&quot;label&quot;:&quot;function(tooltipItem, data) { \n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || &#39;&#39;;\n  return tooltipItem.yLabel + &#39;%&#39;;}&quot;}},&quot;title&quot;:{&quot;display&quot;:true,&quot;text&quot;:&quot;percentage of games played by group size&quot;}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[1,2,3,4,5],&quot;datasets&quot;:[{&quot;data&quot;:[39.22,9.8,21.57,18.63,10.78],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;type&quot;:&quot;bar&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:true},&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false}]}},&quot;evals&quot;:[&quot;options.tooltips.callbacks.label&quot;],&quot;jsHooks&quot;:[]}&lt;/script&gt;
 &lt;!--/html_preserve--&gt;
 
 &lt;p&gt;&lt;strong&gt;Almost 60% of my games have been played with one or more friends&lt;/strong&gt;. If we consider duo queue as part of the original solo queue, about 50% of my ranked games could not have been played under this scheme. But does playing with friends actually make me win more ?&lt;/p&gt;
@@ -350,10 +762,10 @@
   &lt;span class=&quot;n&quot;&gt;cjsTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;win percentage by group size&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;!--html_preserve--&gt;
-&lt;div id=&quot;htmlwidget-5471-container&quot; class=&quot;htmlwidget_container&quot;&gt;
-&lt;canvas id=&quot;htmlwidget-5471&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
+&lt;div id=&quot;htmlwidget-8174-container&quot; class=&quot;htmlwidget_container&quot;&gt;
+&lt;canvas id=&quot;htmlwidget-8174&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
 &lt;/div&gt;
-&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-5471&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;tooltips&quot;:{&quot;callbacks&quot;:{&quot;label&quot;:&quot;function(tooltipItem, data) { \n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || &#39;&#39;;\n  return tooltipItem.yLabel + &#39;%&#39;;}&quot;}},&quot;title&quot;:{&quot;display&quot;:true,&quot;text&quot;:&quot;win percentage by group size&quot;}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[1,2,3,4,5],&quot;datasets&quot;:[{&quot;data&quot;:[57.5,60,54.55,52.63,45.45],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;type&quot;:&quot;bar&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:true},&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false}]}},&quot;evals&quot;:[&quot;options.tooltips.callbacks.label&quot;],&quot;jsHooks&quot;:[]}&lt;/script&gt;
+&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-8174&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;tooltips&quot;:{&quot;callbacks&quot;:{&quot;label&quot;:&quot;function(tooltipItem, data) { \n  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || &#39;&#39;;\n  return tooltipItem.yLabel + &#39;%&#39;;}&quot;}},&quot;title&quot;:{&quot;display&quot;:true,&quot;text&quot;:&quot;win percentage by group size&quot;}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[1,2,3,4,5],&quot;datasets&quot;:[{&quot;data&quot;:[57.5,60,54.55,52.63,45.45],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;type&quot;:&quot;bar&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:true},&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false}]}},&quot;evals&quot;:[&quot;options.tooltips.callbacks.label&quot;],&quot;jsHooks&quot;:[]}&lt;/script&gt;
 &lt;!--/html_preserve--&gt;
 
 &lt;p&gt;It appears that the more friends I play with, the less I win (except for the duo case). Arguably, the sample size is small but still, that was not what I was expecting at all. When I’m playing with friends, we usually are on &lt;a href=&quot;https://github.com/mumble-voip/mumble&quot;&gt;Mumble&lt;/a&gt; in order to coordinate better so this &lt;em&gt;should&lt;/em&gt; technically give us an edge, except if the n-man premade opposite us is also on VoIP.&lt;/p&gt;
@@ -398,10 +810,10 @@
   &lt;span class=&quot;n&quot;&gt;cjsLegend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;!--html_preserve--&gt;
-&lt;div id=&quot;htmlwidget-5831-container&quot; class=&quot;htmlwidget_container&quot;&gt;
-&lt;canvas id=&quot;htmlwidget-5831&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
+&lt;div id=&quot;htmlwidget-5443-container&quot; class=&quot;htmlwidget_container&quot;&gt;
+&lt;canvas id=&quot;htmlwidget-5443&quot; class=&quot;chartjs html-widget&quot; style=&quot;width:504px;height:300px;&quot; width=&quot;504&quot; height=&quot;300px&quot;&gt;&lt;/canvas&gt;
 &lt;/div&gt;
-&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-5831&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:true},&quot;title&quot;:{&quot;display&quot;:true,&quot;text&quot;:&quot;win rate by group size and role&quot;}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[1,2,3,4,5],&quot;datasets&quot;:[{&quot;data&quot;:[33.33,33.33,57.14,53.33,50],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;label&quot;:&quot;win rate - jungle&quot;,&quot;type&quot;:&quot;bar&quot;},{&quot;data&quot;:[61.76,80,50,66.67,33.33],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#B2DF8A&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#33A02C&quot;,&quot;label&quot;:&quot;win rate - support&quot;,&quot;type&quot;:&quot;bar&quot;},{&quot;data&quot;:[6,3,14,15,8],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#FB9A99&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#E31A1C&quot;,&quot;label&quot;:&quot;games - jungle&quot;,&quot;type&quot;:&quot;bar&quot;,&quot;yAxisID&quot;:&quot;y-axis-1&quot;},{&quot;data&quot;:[34,5,8,3,3],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#FDBF6F&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#FF7F00&quot;,&quot;label&quot;:&quot;games - support&quot;,&quot;type&quot;:&quot;bar&quot;,&quot;yAxisID&quot;:&quot;y-axis-1&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:true},&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false},{&quot;ticks&quot;:{&quot;beginAtZero&quot;:true},&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;linear&quot;,&quot;position&quot;:&quot;right&quot;}]}},&quot;evals&quot;:[],&quot;jsHooks&quot;:[]}&lt;/script&gt;
+&lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-5443&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;responsive&quot;:true,&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:true},&quot;title&quot;:{&quot;display&quot;:true,&quot;text&quot;:&quot;win rate by group size and role&quot;}},&quot;palette&quot;:&quot;Paired&quot;,&quot;debug&quot;:false,&quot;type&quot;:&quot;bar&quot;,&quot;data&quot;:{&quot;labels&quot;:[1,2,3,4,5],&quot;datasets&quot;:[{&quot;data&quot;:[33.33,33.33,57.14,53.33,50],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#A6CEE3&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#1F78B4&quot;,&quot;label&quot;:&quot;win rate - jungle&quot;,&quot;type&quot;:&quot;bar&quot;},{&quot;data&quot;:[61.76,80,50,66.67,33.33],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#B2DF8A&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#33A02C&quot;,&quot;label&quot;:&quot;win rate - support&quot;,&quot;type&quot;:&quot;bar&quot;},{&quot;data&quot;:[6,3,14,15,8],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#FB9A99&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#E31A1C&quot;,&quot;label&quot;:&quot;games - jungle&quot;,&quot;type&quot;:&quot;bar&quot;,&quot;yAxisID&quot;:&quot;y-axis-1&quot;},{&quot;data&quot;:[34,5,8,3,3],&quot;borderColor&quot;:&quot;#000000&quot;,&quot;backgroundColor&quot;:&quot;#FDBF6F&quot;,&quot;hoverBorderColor&quot;:&quot;rgba(255,255,255,1)&quot;,&quot;hoverBackgroundColor&quot;:&quot;#FF7F00&quot;,&quot;label&quot;:&quot;games - support&quot;,&quot;type&quot;:&quot;bar&quot;,&quot;yAxisID&quot;:&quot;y-axis-1&quot;}]},&quot;scales&quot;:{&quot;x&quot;:[{&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;category&quot;,&quot;stacked&quot;:false}],&quot;y&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:true},&quot;type&quot;:&quot;linear&quot;,&quot;stacked&quot;:false},{&quot;ticks&quot;:{&quot;beginAtZero&quot;:true},&quot;gridLines&quot;:{&quot;display&quot;:false},&quot;type&quot;:&quot;linear&quot;,&quot;position&quot;:&quot;right&quot;}]}},&quot;evals&quot;:[],&quot;jsHooks&quot;:[]}&lt;/script&gt;
 &lt;!--/html_preserve--&gt;
 
 &lt;p&gt;Well, it’s right there: when playing solo or duo, I play much more as a support than a jungler with a win rate that is much higher. When in a group of 3 or more, I usually play jungle more and my win rate is not that high.&lt;/p&gt;
