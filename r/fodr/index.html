@@ -331,10 +331,12 @@
 
 <ul>
   <li><code class="highlighter-rouge">fodr</code> only handles the OpenDataSoft API and many of the French open data portals use the <a href="http://www.esri.com/software/arcgis/arcgisonline/arcgis-open-data">ArcGIS Open platform</a>,</li>
-  <li>some do not have an API, like the <a href="http://data.gouv.fr/">Data.gouv</a> or the <a href="http://data.grandlyon.com/">Grand Lyon</a> website,</li>
+  <li>some do not have an API, like the <del><a href="https://www.data.gouv.fr/en/">data.gouv</a> or</del> <a href="http://data.grandlyon.com/">Grand Lyon</a> website,</li>
   <li>some use the <a href="http://www.navitia.io/">navitia.io</a> API, like the <a href="https://data.sncf.com/">SNCF</a> website,</li>
   <li>some simply do not have data</li>
 </ul>
+
+<p><em>Note from 2016/05/31 19:24: <a href="https://twitter.com/joelgombin">Joel Gombin</a> graciously pointed out to me that the <a href="https://www.data.gouv.fr/en/">data.gouv</a> DOES have an API (<a href="https://www.data.gouv.fr/en/apidoc/">available here</a>).</em></p>
 
 <p>To obtain this list, I looked at the Open Data Inception dataset and tried to access a method on the API to see if it returned any results and curated the remaining datasets but I’m pretty sure there is a better way to do it:</p>
 
@@ -392,7 +394,7 @@
 
 <h3 id="fetching-data---the-search-method">Fetching data - the search method</h3>
 
-<p>For a <code class="highlighter-rouge">FODRPortal</code>, there is only one method: <code class="highlighter-rouge">search</code>. It leverages the <strong>OpenDataSoft</strong> <a href="">catalog API</a> in order to find relevant datasets. By default, calling the <code class="highlighter-rouge">search</code> method will retrieve <strong>all</strong> elements that satisfy the query, contrary to the <strong>OpenDataSoft</strong> API that only retrieves 10.</p>
+<p>For a <code class="highlighter-rouge">FODRPortal</code>, there is only one method: <code class="highlighter-rouge">search</code>. It leverages the <strong>OpenDataSoft</strong> <a href="https://docs.opendatasoft.com/en/api/catalog_api.html">Catalog API</a> in order to find relevant datasets. By default, calling the <code class="highlighter-rouge">search</code> method will retrieve <strong>all</strong> elements that satisfy the query, contrary to the <strong>OpenDataSoft</strong> API that only retrieves 10.</p>
 
 <p>There are several arguments to this function that are detailed in the <strong>OpenDataSoft</strong> documentation. I also added another argument, <em>theme</em>, that allows to return all datasets that fall under a specific theme.</p>
 
@@ -457,7 +459,7 @@
 
 <h4 id="the-getrecords-method">The get_records method</h4>
 
-<p>The <code class="highlighter-rouge">get_records</code> method the <a href="https://docs.opendatasoft.com/en/api/records_api.html#records-download-api">Records download API</a> and again fetches all available records instead of the first 10.</p>
+<p>The <code class="highlighter-rouge">get_records</code> method leverages the <a href="https://docs.opendatasoft.com/en/api/records_api.html#records-download-api">Records download API</a> and again fetches all available records instead of the first 10.</p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dfRecords</span> <span class="o">&lt;-</span> <span class="n">dts</span><span class="o">$</span><span class="n">get_records</span><span class="p">()</span>
 <span class="n">dfRecords</span></code></pre></figure>
@@ -635,8 +637,8 @@
 <span class="n">m</span></code></pre></figure>
 
 <!--html_preserve-->
-<div id="htmlwidget-7502" style="width:900px;height:504px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7502">{"x":{"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[48.8320357,48.8580602,48.849937,48.8844441,48.8419904,48.8665015,48.8905832,48.8459745,48.8848913,48.8733839,48.8883086,48.8775273072746,48.8772091,48.8618192,48.8311087,48.8841895,48.8425318,48.8993441,48.8268092,48.8719649,48.8521289,48.859817,48.894909,48.86306045,48.8715798,48.8719634,48.8793551,48.8659605,48.8455293,48.8568598,48.8779745,48.8386225,48.8478671,48.8561772,48.8873166,48.8811111,48.8718064,48.8515962,48.8762706,48.8402996,48.8531576,48.8600425,48.8367728,48.8424926,48.8591443,48.8890032,48.8417004,48.8897366,48.8350219,48.8308705,48.8415767,48.8392527,48.8717915,48.8778252,48.8848773,48.863631],[2.310555,2.3089956,2.2864279,2.3219036,2.3591175,2.3404242,2.3441532,2.3777229,2.3830431,2.3404653,2.3027261,2.31749791213483,2.3708098,2.2847432,2.3442413,2.3541593,2.3974589,2.3361773,2.3663928,2.3626033,2.3452233,2.4032053,2.3637139,2.34573014114648,2.408439,2.3998434,2.3975049,2.3928351,2.3871246,2.3200325,2.3450099,2.3218739,2.3275429,2.3556453,2.3724595,2.3323039,2.3893099,2.3839448,2.3881083,2.278541,2.4010184,2.3412674,2.3036789,2.3496874,2.3794671,2.362957,2.2993589,2.3197217,2.3268861,2.3569681,2.2657172,2.3383332,2.357372,2.3029806,2.3674171,2.3600893],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Aimé Césaire","Amélie","Andrée Chedid","Batignolles","Buffon","Charlotte Delbo","Robert Sabatier","Diderot","Crimée","Drouot","Edmond Rostand","Europe","François Villon","Germaine Tillion","Glacière","Goutte d'or","Hélène Berr","Jacqueline de Romilly","Jean-Pierre Melville","Lancry","L'Heure Joyeuse","Marguerite Duras","Maurice Genevoix","MMP","Mortier","Oscar Wilde","Place des fêtes","Sorbier","Saint Eloi","Saint Simon","Valeyre","Vandamme","André Malraux","Arthur Rimbaud","Benjamin Rabier","Chaptal","Couronnes","Faidherbe","Fessart","Gutenberg","Louise Michel","Louvre","Marguerite Yourcenar","Mohammed Arkoun","Parmentier","Vaclav Havel","Vaugirard","Colette Vivier","Georges Brassens","Italie","Musset","Rainer Maria Rilke","Château d'eau","Courcelles","Hergé","Marguerite Audoux"],{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true},null,null,null]}],"limits":{"lat":[48.8268092,48.8993441],"lng":[2.2657172,2.408439]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-1936" style="width:900px;height:504px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1936">{"x":{"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false}]},{"method":"addMarkers","args":[[48.8320357,48.8580602,48.849937,48.8844441,48.8419904,48.8665015,48.8905832,48.8459745,48.8848913,48.8733839,48.8883086,48.8775273072746,48.8772091,48.8618192,48.8311087,48.8841895,48.8425318,48.8993441,48.8268092,48.8719649,48.8521289,48.859817,48.894909,48.86306045,48.8715798,48.8719634,48.8793551,48.8659605,48.8455293,48.8568598,48.8779745,48.8386225,48.8478671,48.8561772,48.8873166,48.8811111,48.8718064,48.8515962,48.8762706,48.8402996,48.8531576,48.8600425,48.8367728,48.8424926,48.8591443,48.8890032,48.8417004,48.8897366,48.8350219,48.8308705,48.8415767,48.8392527,48.8717915,48.8778252,48.8848773,48.863631],[2.310555,2.3089956,2.2864279,2.3219036,2.3591175,2.3404242,2.3441532,2.3777229,2.3830431,2.3404653,2.3027261,2.31749791213483,2.3708098,2.2847432,2.3442413,2.3541593,2.3974589,2.3361773,2.3663928,2.3626033,2.3452233,2.4032053,2.3637139,2.34573014114648,2.408439,2.3998434,2.3975049,2.3928351,2.3871246,2.3200325,2.3450099,2.3218739,2.3275429,2.3556453,2.3724595,2.3323039,2.3893099,2.3839448,2.3881083,2.278541,2.4010184,2.3412674,2.3036789,2.3496874,2.3794671,2.362957,2.2993589,2.3197217,2.3268861,2.3569681,2.2657172,2.3383332,2.357372,2.3029806,2.3674171,2.3600893],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Aimé Césaire","Amélie","Andrée Chedid","Batignolles","Buffon","Charlotte Delbo","Robert Sabatier","Diderot","Crimée","Drouot","Edmond Rostand","Europe","François Villon","Germaine Tillion","Glacière","Goutte d'or","Hélène Berr","Jacqueline de Romilly","Jean-Pierre Melville","Lancry","L'Heure Joyeuse","Marguerite Duras","Maurice Genevoix","MMP","Mortier","Oscar Wilde","Place des fêtes","Sorbier","Saint Eloi","Saint Simon","Valeyre","Vandamme","André Malraux","Arthur Rimbaud","Benjamin Rabier","Chaptal","Couronnes","Faidherbe","Fessart","Gutenberg","Louise Michel","Louvre","Marguerite Yourcenar","Mohammed Arkoun","Parmentier","Vaclav Havel","Vaugirard","Colette Vivier","Georges Brassens","Italie","Musset","Rainer Maria Rilke","Château d'eau","Courcelles","Hergé","Marguerite Audoux"],{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true},null,null,null]}],"limits":{"lat":[48.8268092,48.8993441],"lng":[2.2657172,2.408439]}},"evals":[],"jsHooks":[]}</script>
 <!--/html_preserve-->
 
 <h2 id="future-work">Future work</h2>
@@ -846,7 +848,7 @@
   
   <script type="text/javascript">
   	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-  	var disqus_shortname = 'pierreformont';
+  	var disqus_shortname = 'tutuchan';
   	var disqus_identifier = "/r/fodr/";
 
   	/* * * DON'T EDIT BELOW THIS LINE * * */
